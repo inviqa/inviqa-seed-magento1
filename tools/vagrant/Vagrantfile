@@ -28,11 +28,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   # vagrant-hostsupdater settings
-  config.vm.hostname = "{{name}}.development.local"
+  config.vm.hostname = "{{hostname}}"
   # config.hostsupdater.aliases = []
 
   # vagrant-omnibus settings
-  config.omnibus.chef_version = :latest
+  config.omnibus.chef_version = '11.8.2'
 
   # vagrant-cachier settings
   config.cache.auto_detect = true

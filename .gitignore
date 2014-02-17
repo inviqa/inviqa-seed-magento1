@@ -1,9 +1,11 @@
-# eneral
+# General
 *.vagrant
 .bundle
 build/*
 tools/chef/cookbooks/*
 tools/chef/tmp/*
+tools/assets/*
+bin/*
 
 # Composer
 vendor

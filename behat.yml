@@ -1,7 +1,7 @@
 default:
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: 'http://{{name}}.development.local/'
+      base_url: 'http://{{hostname}}/'
       goutte:
         guzzle_parameters:
           curl.options:
@@ -19,7 +19,7 @@ default:
 phantomjs:
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: 'http://{{name}}.development.local/'
+      base_url: 'http://{{hostname}}/'
       selenium2:
         wd_host: http://localhost:4444/wd/hub
         browser: phantomjs

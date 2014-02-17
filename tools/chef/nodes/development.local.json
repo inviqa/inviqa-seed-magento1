@@ -7,7 +7,7 @@
   ],
   "nginx": {
     "sites": {
-      "{{name}}.development.local": {
+      "{{hostname}}": {
         "docroot": "/vagrant/public"
       }
     }
