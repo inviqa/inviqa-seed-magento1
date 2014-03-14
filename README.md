@@ -1,8 +1,8 @@
-# Hobo project seed (framework agnostic)
+# Hobo project seed (magento specific)
 
-This repository contains the common configuration, structure and tooling necessary to kickstart a framework agnostic project in a consistent manner.
+This repository contains the common configuration, structure and tooling necessary to kickstart a magento project in a consistent manner.
 
-It is designed for use with the "hobo seed plant" command and while cloning it directly as a base to start from, you'll be missing out hobo being able to populate some placeholders for you.
+It is designed for use with the "hobo seed plant" command. Cloning it directly is not recommended as you will need to manually populate placeholders, initialize submodules and fetch magento sample data.
 
 ## Goals
 
@@ -15,7 +15,6 @@ The folder structure is as follows:
 - __features/__ - Behat feature files
 - __spec/__ - PHPSpec specs
 - __public/__ - Publically accessible files (docroot)
-- __src/__ - Library / application code
 - __tools/capistrano/__ - Cap config
 - __tools/chef/__ - Chef config
 - __tools/vagrant/__ - Vagrant config

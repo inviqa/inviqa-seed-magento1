@@ -1,5 +1,9 @@
 default:
   extensions:
+    MageTest\MagentoExtension\Extension: ~
+    SensioLabs\Behat\PageObjectExtension\Extension:
+      namespaces:
+        page: features\bootstrap\Page
     Behat\MinkExtension\Extension:
       base_url: 'http://{{hostname}}/'
       goutte:
@@ -14,7 +18,7 @@ default:
         browser: phantomjs
 #   command to open the failing html pages:
       show_cmd: echo '%s'
-      show_tmp_dir: /mnt/project/
+      show_tmp_dir: /vagrant
 
 phantomjs:
   extensions:

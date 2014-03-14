@@ -1,0 +1,15 @@
+extensions:
+  - MageTest\PhpSpec\MagentoExtension\Extension
+  - PhpSpec\Extension\CodeCoverageExtension
+mage_locator:
+  spec_prefix: 'spec'
+  src_path: 'public/app/code'
+  spec_path: 'spec/public/app/code'
+code_coverage:
+  whitelist:
+    - "public/app/code/local"
+  output: "build/coverage/clover.xml"
+  format: "clover"
+  show_uncovered_files: true
+  lower_upper_bound: 100
+  high_lower_bound: 100

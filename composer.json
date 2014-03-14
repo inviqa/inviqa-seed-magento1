@@ -3,9 +3,12 @@
         "php": ">=5.4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "bossa/phpspec2-expect": "*",
+        "phpspec/phpspec": "dev-master#3bcf4e4ec83dc345d0fff7f22b0641a25403dcc9",
+        "phpspec/prophecy": "dev-master#82d11835df7eccf904ea0c84fbb7304080346bc1",
+        "magetest/magento-phpspec-extension": "dev-develop",
+        "magetest/magento-behat-extension": "dev-feature/refactor",
         "behat/behat": "2.4.*@stable",
+        "behat/mink-selenium2-driver": "*",
         "behat/mink-goutte-driver": "1.0.*",
         "squizlabs/php_codesniffer": "1.*",
         "phpmd/phpmd": "1.*",
@@ -20,5 +23,17 @@
     "config": {
         "bin-dir": "bin"
     },
-    "autoload": {"psr-0": {"": "src"}}
+    "autoload": {
+        "psr-0": {
+            "MageTest\\PhpSpec\\MagentoExtension": "src",
+            "": [
+                "public/app/code/local",
+                "public/app/code/community",
+                "public/app/code/core",
+                "public/app",
+                "public/lib"
+            ],
+            "Mage" : "public/app/code/core"
+        }
+    }
 }

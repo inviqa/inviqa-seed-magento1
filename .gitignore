@@ -17,3 +17,10 @@ composer.phar
 .sass-cache/*
 *.css.map
 node_modules/*
+
+# Magento
+public/app/etc/local.xml
+public/errors/local.xml
+public/media
+public/privatesales
+public/var

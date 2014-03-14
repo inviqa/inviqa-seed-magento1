@@ -3,7 +3,9 @@
     "role[packer]",
     "recipe[php]",
     "role[web-nginx]",
-    "role[db]"
+    "role[db]",
+    "role[web-magento]",
+    "recipe[config-driven-helper::packages]"
   ],
   "nginx": {
     "sites": {
@@ -11,5 +13,33 @@
         "docroot": "/vagrant/public"
       }
     }
+  },
+  "mysql": {
+    "users": {
+      "magento": {
+        "password": "magento",
+        "database_name": "magentodb"
+      }
+    }
+  },
+  "magento": {
+    "db": {
+      "username": "magento",
+      "password": "magento",
+      "database": "magentodb"
+    },
+    "dir": "/vagrant/public",
+
+    "## Needed?": "",
+
+    "server": {
+      "servername": "{{hostname}}"
+    },
+    "sites": [
+      {
+        "servername": "{{hostname}}",
+        "run_code": "default"
+      }
+    ]
   }
 }

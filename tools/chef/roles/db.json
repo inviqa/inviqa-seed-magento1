@@ -5,6 +5,8 @@
   "description": "MySQL 5.5 database",
   "override_attributes": {},
   "run_list": [
-    "recipe[mysql]"
+    "recipe[mysql]",
+    "recipe[config-driven-helper::mysql-databases]",
+    "recipe[config-driven-helper::mysql-users]"
   ]
 }

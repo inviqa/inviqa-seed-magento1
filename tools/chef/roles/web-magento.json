@@ -1,0 +1,17 @@
+{
+  "name": "web-magento",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Magento web front end",
+  "default_attributes": {
+    "magento": {
+      "app": {
+        "multi_session_save": "memcache",
+        "backend_cache": "Cm_Cache_Backend_Redis"
+      }
+    }
+  },
+  "run_list": [
+    "recipe[chef-magento::config_local]"
+  ]
+}

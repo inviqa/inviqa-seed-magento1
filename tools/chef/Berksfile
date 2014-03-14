@@ -4,7 +4,7 @@
 cookbook 'yum', '2.4.4'
 cookbook 'mysql'
 cookbook 'php'
-cookbook 'redisio'
+cookbook 'redisio', '1.7.1'
 cookbook 'memcached'
 cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
 cookbook 'apache2'
@@ -13,3 +13,8 @@ cookbook 'jetty', :github => 'inviqa/chef-jetty'
 cookbook 'solr', :github => 'inviqa/chef-solr'
 cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
 cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'
+
+cookbook 'chef-magento', :github => 'inviqa/chef-magento'
+
+# Don't use anything from this; it's required by chef-magento at the moment
+cookbook 'chef-php-extra', :github => 'inviqa/chef-php-extra'

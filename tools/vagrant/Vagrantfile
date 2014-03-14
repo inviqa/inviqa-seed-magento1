@@ -4,13 +4,7 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-# Temporary hack for https://tickets.opscode.com/browse/CHEF-4725
-class << Vagrant::Util::TemplateRenderer
-  alias r render
-  def render(*a)
-    r(*a) << (a[0] =~ /solo$/ ? "\nlog_location STDOUT" : "")
-  end
-end
+Vagrant.require_version ">= 1.5.0"
 
 Vagrant.require_plugin "vagrant-hostsupdater"
 Vagrant.require_plugin "vagrant-omnibus"
@@ -23,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = 'http://invi.qa/LhkAs9'
 
   # Network configuration
-  config.vm.network :private_network, ip: "{{vm_ip}}"
+  config.vm.network :private_network, ip: "10.199.45.152"
   config.ssh.forward_agent = true
 
   # vagrant-hostsupdater settings
@@ -31,14 +25,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.hostsupdater.aliases = []
 
   # vagrant-omnibus settings
-  config.omnibus.chef_version = '11.8.2'
+  config.omnibus.chef_version = '11.10.4'
 
   # vagrant-cachier settings
   config.cache.auto_detect = true
 
   # Shared folders
   require 'ffi'
-  config.vm.synced_folder "../../", "/vagrant", :nfs => ! FFI::Platform::IS_WINDOWS
+  nfs = FFI::Platform::IS_WINDOWS ? false : Hash.new(:mount_options => ["dmode=777","fmode=777"])
+  config.vm.synced_folder(
+      "../../",
+      "/vagrant",
+      :nfs => nfs
+  )
 
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb|
