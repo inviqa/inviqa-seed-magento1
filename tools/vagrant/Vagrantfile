@@ -13,8 +13,8 @@ Vagrant.require_plugin "vagrant-cachier"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Box configuration
-  config.vm.box = 'CentOS-6.5-stack+nginx-0.1.1'
-  config.vm.box_url = 'http://invi.qa/LhkAs9'
+  config.vm.box = 'CentOS-6.5-stack+nginx-0.1.2'
+  config.vm.box_url = 'http://invi.qa/1pBlHjM'
 
   # Network configuration
   config.vm.network :private_network, ip: "10.199.45.152"

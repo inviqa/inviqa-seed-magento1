@@ -6,3 +6,6 @@ sync.sync(
   File.join(Hobo.project_config.project_path, "tools/assets/development/")
 )
 Hobo.ui.separator
+
+Hobo.ui.success "Don't forgot to run `hobo assets upload` once your S3 bucket is created!"
+Hobo.ui.separator

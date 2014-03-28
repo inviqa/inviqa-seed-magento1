@@ -14,10 +14,14 @@
         "mod_expires",
         "mod_headers"
       ]
+    },
+    "services": {
+      "httpd": ["enable", "start"]
     }
   },
   "run_list": [
     "recipe[apache2]",
+    "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::apache-sites]"
   ]
 }

@@ -4,6 +4,8 @@
     "recipe[php]",
     "role[web-nginx]",
     "role[db]",
+    "role[redis]",
+    "role[memcache]",
     "role[web-magento]",
     "recipe[config-driven-helper::packages]"
   ],
@@ -28,18 +30,6 @@
       "password": "magento",
       "database": "magentodb"
     },
-    "dir": "/vagrant/public",
-
-    "## Needed?": "",
-
-    "server": {
-      "servername": "{{hostname}}"
-    },
-    "sites": [
-      {
-        "servername": "{{hostname}}",
-        "run_code": "default"
-      }
-    ]
+    "dir": "/vagrant/public"
   }
 }

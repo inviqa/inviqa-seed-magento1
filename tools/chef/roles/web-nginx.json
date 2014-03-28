@@ -6,10 +6,15 @@
   "default_attributes": {
     "nginx": {
       "default_site_enabled": false
+    },
+    "services": {
+      "nginx": ["enable", "start"],
+      "php-fpm": ["enable", "start"]
     }
   },
   "run_list": [
     "recipe[nginx]",
+    "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::nginx-sites]"
   ]
 }
