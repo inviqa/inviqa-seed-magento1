@@ -5,7 +5,7 @@ module InviqaCap
     def self.load_into(config)
       config.load do
         after "deploy:setup", "inviqa:composer:setup"
-        before "deploy:create_symlink", "inviqa:composer:install"
+        after "deploy:finalize_update", "inviqa:composer:install"
 
         namespace :inviqa do
           namespace :composer do
@@ -15,10 +15,10 @@ module InviqaCap
             end
 
             task :install do
-              run "cp #{release_path}/composer.json #{shared_path}/composer"
+              run "cp #{latest_release}/composer.json #{shared_path}/composer"
               run "cd #{shared_path} && php #{shared_path}/composer.phar self-update"
               run "cd #{shared_path}/composer && php #{shared_path}/composer.phar install --no-dev --optimize-autoloader"
-              run "cp -R #{shared_path}composer/* #{release_path}"
+              run "cp -R #{shared_path}/composer/* #{latest_release}"
             end
           end
         end
