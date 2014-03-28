@@ -40,9 +40,9 @@
       "ref": "dcb5cfdf91006481f3e8b486975e9098c75f6713"
     },
     "config-driven-helper": {
-      "locked_version": "1.0.2",
+      "locked_version": "1.0.3",
       "git": "git://github.com/inviqa/chef-config-driven-helper.git",
-      "ref": "0a7c1a1fe36bfd1f15a6ac92c3465307081926aa"
+      "ref": "5ffba6a0cc34ed0e9399f447ae81bd02ba641951"
     },
     "chef-magento": {
       "locked_version": "1.0.2",
