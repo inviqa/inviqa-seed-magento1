@@ -21,7 +21,7 @@ module InviqaCap
             linked = (linked_directories || []).concat(linked_files || [])
             linked.each do |file|
               shared_file = File.join(shared_path, file)
-              release_file = File.join(release_path, file)
+              release_file = File.join(latest_release, file)
               run "rm -rf #{release_file}"
               run "ln -s #{shared_file} #{release_file}"
             end
