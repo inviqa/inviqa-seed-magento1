@@ -47,12 +47,12 @@
     "chef-magento": {
       "locked_version": "1.0.2",
       "git": "git://github.com/inviqa/chef-magento.git",
-      "ref": "05038c24f8aca6fb2bcff5c892850febd7ec331c"
+      "ref": "f6feb068fa4d53a89892127f92f3dc5129e269b9"
     },
     "chef-php-extra": {
       "locked_version": "0.4.0",
       "git": "git://github.com/inviqa/chef-php-extra.git",
-      "ref": "3db9fd741fe7ff2c6de9ed7af363d1e24aca718b"
+      "ref": "7a743aa34e9082ae56ba8c64d26ee1d1b147a81a"
     },
     "openssl": {
       "locked_version": "1.1.0"

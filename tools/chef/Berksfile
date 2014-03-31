@@ -2,19 +2,19 @@
 #^syntax detection
 
 cookbook 'yum', '2.4.4'
-cookbook 'mysql'
-cookbook 'php'
+cookbook 'mysql', '4.0.20'
+cookbook 'php', '1.3.12'
 cookbook 'redisio', '1.7.1'
-cookbook 'memcached'
+cookbook 'memcached', '1.7.2'
 cookbook 'nginx', '2.0.8' # Latest to support yum 2.x cookbook
-cookbook 'apache2'
-cookbook 'elasticsearch'
-cookbook 'jetty', :github => 'inviqa/chef-jetty'
-cookbook 'solr', :github => 'inviqa/chef-solr'
-cookbook 'chef-varnish', :github => 'inviqa/chef-varnish'
-cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper'
+cookbook 'apache2', '1.8.14'
+cookbook 'elasticsearch', '0.3.7'
+cookbook 'jetty', :github => 'inviqa/chef-jetty', :ref => '967f9ecb49c359b3b2b95ee80bab5f24ee18de7a'
+cookbook 'solr', :github => 'inviqa/chef-solr', :tag => '1.0.0'
+cookbook 'chef-varnish', :github => 'inviqa/chef-varnish', :ref => 'dcb5cfdf91006481f3e8b486975e9098c75f6713' # 1.0.4
+cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper', :tag => '1.0.3'
 
-cookbook 'chef-magento', :github => 'inviqa/chef-magento'
+cookbook 'chef-magento', :github => 'inviqa/chef-magento', :tag => '1.0.2'
 
 # Don't use anything from this; it's required by chef-magento at the moment
-cookbook 'chef-php-extra', :github => 'inviqa/chef-php-extra'
+cookbook 'chef-php-extra', :github => 'inviqa/chef-php-extra', :tag => '0.4.0'
