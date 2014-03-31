@@ -2,18 +2,4 @@
 # ^ Syntax hint
 
 require 'hobo/tasks/magento'
-
-
-after "vm:up" do
-  url = "http://#{Hobo.project_config.hostname}/"
-  commands = {
-      "Setting unsecure uri (#{url})" => vm_command("bin/n98-magerun.phar config:set web/unsecure/base_url '#{url}'"),
-      "Setting secure uri (#{url})" => vm_command("bin/n98-magerun.phar config:set web/secure/base_url '#{url}'"),
-  }
-
-  commands.each do |description, command|
-    Hobo.ui.success description
-    shell command.to_s, :realtime => true, :indent => 2
-    Hobo.ui.separator
-  end
-end
+task "vm:up" => ["magento:initialize-vm"]
