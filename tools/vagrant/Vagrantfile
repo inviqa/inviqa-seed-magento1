@@ -32,11 +32,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Shared folders
   require 'ffi'
-  nfs = FFI::Platform::IS_WINDOWS ? false : Hash.new(:mount_options => ["dmode=777","fmode=777"])
+  mount_options = ["dmode=777", "fmode=777"]
+  opts = if FFI::Platform::IS_WINDOWS
+    { :mount_options => mount_options }
+  else
+    { :nfs => mount_options }
+  end
+
   config.vm.synced_folder(
-      "../../",
-      "/vagrant",
-      :nfs => nfs
+    "../../",
+    "/vagrant",
+    opts
   )
 
   # Virtualbox specific configuration
