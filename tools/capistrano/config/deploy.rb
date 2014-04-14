@@ -14,6 +14,4 @@ set :keep_releases, 5
 set :linked_files, [ ]
 set :linked_directories, [ ]
 
-set :ssh_options, { :forward_agent => true }
-
 after "deploy:finalize_update", "deploy:cleanup"
