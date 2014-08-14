@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = 'http://invi.qa/1pBlHjM'
 
   # Network configuration
-  config.vm.network :private_network, ip: "10.199.45.152"
+  config.vm.network :private_network, ip: "{{vm_ip}}"
   config.ssh.forward_agent = true
 
   # vagrant-hostsupdater settings
