@@ -1,19 +1,29 @@
 sync = Hobo::Lib::S3::Sync.new(Hobo.aws_credentials)
 default_edition = 'enterprise'
-default_version = {
-  'enterprise' => '1.14.0.1',
-  'community' => '1.9.0.1'
-}
+editions = ['enterprise', 'community']
 
-Hobo.project_config[:magento_edition] ||= default_edition
-Hobo.project_config[:magento_version] ||= default_version[Hobo.project_config[:magento_edition]]
+if Hobo.project_config[:magento_edition].nil? || !editions.include?(Hobo.project_config[:magento_edition])
+  Hobo.project_config[:magento_edition] = Hobo.ui.ask_choice("Magento edition", editions, :default => default_edition)
+end
 
 magento_edition = Hobo.project_config[:magento_edition]
-magento_version = Hobo.project_config[:magento_version]
-
-magento_version_parts = magento_version.split('.')
 
 magento_git_url = "git@github.com:inviqa/magento-#{magento_edition}"
+
+magento_seed = Hobo::Lib::Seed::Seed.new(
+  File.join(Hobo.seed_cache_path, "magento-#{magento_edition}"),
+  magento_git_url
+)
+magento_seed.update
+
+versions = magento_seed.tags.reverse
+
+if Hobo.project_config[:magento_version].nil? || !versions.include?(Hobo.project_config[:magento_version])
+  Hobo.project_config[:magento_version] = Hobo.ui.ask_choice("Magento version", versions, :default => versions.first)
+end
+
+magento_version = Hobo.project_config[:magento_version]
+magento_version_parts = magento_version.split('.')
 
 magento_semver = Semantic::Version.new(magento_version_parts[0..2].join('.') + "-pre.#{magento_version_parts[3]}")
 
@@ -32,12 +42,7 @@ sample_data_version = case magento_edition
     end
   end
 
-magento_seed = Hobo::Lib::Seed::Seed.new(
-  File.join(Hobo.seed_cache_path, "magento-#{magento_edition}"),
-  magento_git_url
-)
 
-magento_seed.update
 magento_seed.export File.join(Hobo.project_config.project_path, 'public'),
   :name => "magento-#{magento_edition}",
   :ref => magento_version
