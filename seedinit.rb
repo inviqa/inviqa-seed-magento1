@@ -1,8 +1,50 @@
 sync = Hobo::Lib::S3::Sync.new(Hobo.aws_credentials)
+default_edition = 'enterprise'
+default_version = {
+  'enterprise' => '1.14.0.1',
+  'community' => '1.9.0.1'
+}
+
+Hobo.project_config[:magento_edition] ||= default_edition
+Hobo.project_config[:magento_version] ||= default_version[Hobo.project_config[:magento_edition]]
+
+magento_edition = Hobo.project_config[:magento_edition]
+magento_version = Hobo.project_config[:magento_version]
+
+magento_version_parts = magento_version.split('.')
+
+magento_git_url = "git@github.com:inviqa/magento-#{magento_edition}"
+
+magento_semver = Semantic::Version.new(magento_version_parts[0..2].join('.') + "-pre.#{magento_version_parts[3]}")
+
+sample_data_version = case magento_edition
+  when 'enterprise'
+    if magento_semver.satisfies('>= 1.14')
+      '1.14.0.0'
+    else
+      '1.11.1.0'
+    end
+  when 'community'
+    if magento_semver.satisfies('>= 1.9')
+      '1.9.0.0'
+    else
+      '1.6.1.0'
+    end
+  end
+
+magento_seed = Hobo::Lib::Seed::Seed.new(
+  File.join(Hobo.seed_cache_path, "magento-#{magento_edition}"),
+  magento_git_url
+)
+
+magento_seed.update
+magento_seed.export File.join(Hobo.project_config.project_path, 'public'),
+  :name => "magento-#{magento_edition}",
+  :ref => magento_version
 
 Hobo.ui.success("Downloading magento sample data")
 sync.sync(
-  "s3://inviqa-assets-magento/development/1.14.0.0/",
+  "s3://inviqa-assets-magento/#{magento_edition}/sample-data/#{sample_data_version}/",
   File.join(Hobo.project_config.project_path, "tools/assets/development/")
 )
 Hobo.ui.separator
