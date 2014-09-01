@@ -19,13 +19,13 @@ magento_semver = Semantic::Version.new(magento_version_parts[0..2].join('.') + "
 
 sample_data_version = case magento_edition
   when 'enterprise'
-    if magento_semver.satisfies('>= 1.14')
+    if magento_semver.satisfies('>= 1.14.0-pre.0')
       '1.14.0.0'
     else
       '1.11.1.0'
     end
   when 'community'
-    if magento_semver.satisfies('>= 1.9')
+    if magento_semver.satisfies('>= 1.9.0-pre.0')
       '1.9.0.0'
     else
       '1.6.1.0'
