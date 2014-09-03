@@ -1,3 +1,8 @@
+unless ::Semantic::Version.new(Hobo::VERSION).satisfies('>= 0.0.15')
+  FileUtils.rm_rf Hobo.project_config.project_path
+  raise Hobo::UserError.new "This seed requires at least hobo 0.0.15\n\nPlease upgrade with `gem install hobo-inviqa`"
+end
+
 sync = Hobo::Lib::S3::Sync.new(Hobo.aws_credentials)
 default_edition = 'enterprise'
 editions = ['enterprise', 'community']
