@@ -62,6 +62,10 @@ Hobo.ui.separator
 Hobo.ui.success "Don't forgot to run `hobo assets upload` once your S3 bucket is created!"
 Hobo.ui.separator
 
+Hobo.ui.success "Please also run `hobo magento patches apply` to get the latest Magento patches."
+Hobo.ui.success "You may have to have run `hobo vm up` beforehand if you aren't on Linux/OSX"
+Hobo.ui.separator
+
 # Overwrite hobo README with project README
 old_readme = File.join(Hobo.project_config.project_path, 'README.md')
 new_readme = File.join(Hobo.project_config.project_path, 'README.project.md')
