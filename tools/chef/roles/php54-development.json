@@ -1,0 +1,16 @@
+{
+  "name": "php54",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP5.4 role",
+  "override_attributes": {
+    "php": {
+      "packages": [
+        "php54-pecl-xdebug"
+      ]
+    }
+  },
+  "run_list": [
+    "role[php54]"
+  ]
+}

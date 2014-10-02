@@ -25,4 +25,4 @@ function resolve_dir() {
 
 RUBY_VERSION=1.9.3-p448
 GEMSET_NAME=$(basename $(resolve_dir $(dirname $0)/../../../))
-HOBO_GEMSET_NAME=hobo-0.0.11
+HOBO_GEMSET_NAME=hobo-0.0.13

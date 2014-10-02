@@ -3,6 +3,42 @@
   "description": "",
   "json_class": "Chef::Environment",
   "chef_type": "environment",
-  "default_attributes": {},
-  "override_attributes": {}
+
+  "default_attributes": {
+    "nginx": {
+      "sites": {
+        "{{hostname}}": {
+          "server_name": "{{hostname}}",
+          "docroot": "/vagrant/public",
+          "protocols": ["http", "https"]
+        }
+      }
+    },
+
+    "mysql": {
+      "users": {
+        "magento": {
+          "database_name": "magentodb"
+        }
+      }
+    },
+
+    "magento": {
+      "db": {
+        "username": "magento",
+        "database": "magentodb"
+      },
+      "dir": "/vagrant/public"
+    },
+
+    "packages": [ "git" ]
+  },
+
+  "override_attributes": {
+    "data-bag-merge": {
+      "environments": {
+        "encrypted": false
+      }
+    }
+  }
 }
