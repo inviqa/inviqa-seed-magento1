@@ -12,6 +12,10 @@ module InviqaCap
 
         namespace :inviqa do
           task :setup do
+            (linked_files || []).each do |file|
+              run "mkdir -p #{File.join(shared_path, File.dirname(file))}"
+            end
+
             (linked_directories || []).each do |file|
               run "mkdir -p #{File.join(shared_path, file)}"
             end
