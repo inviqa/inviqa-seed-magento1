@@ -1,14 +1,15 @@
 #!/usr/bin/env ruby
 # ^ Syntax hint
+require 'ffi'
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.5.0"
 
-Vagrant.require_plugin "vagrant-hostsupdater"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-cachier"
+# Hobo.vagrant_plugin "vagrant-hostsupdater"
+# Hobo.vagrant_plugin "vagrant-omnibus"
+# Hobo.vagrant_plugin "vagrant-cachier"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -30,29 +31,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # vagrant-cachier settings
   config.cache.auto_detect = true
 
-  # Shared folders
-  require 'ffi'
-  mount_options = ["dmode=777", "fmode=777"]
-  opts = if FFI::Platform::IS_WINDOWS
-    { :mount_options => mount_options }
-  else
-    { :nfs => mount_options }
-  end
-
-  config.vm.synced_folder(
-    "../../",
-    "/vagrant",
-    opts
-  )
-
   # Virtualbox specific configuration
-  config.vm.provider :virtualbox do |vb|
+  config.vm.provider :virtualbox do |vb, overrides|
     #vb.gui = true
     vb.customize [
       "modifyvm", :id,
       "--memory", "1024",
       "--name", "{{name}}"
     ]
+
+    # Network configuration
+    overrides.vm.network :private_network, ip: "{{vm_ip}}"
+    overrides.ssh.forward_agent = true
+
+    # Box configuration
+    overrides.vm.box = 'CentOS-6.5-stack+nginx-0.1.4'
+    overrides.vm.box_url = 'http://invi.qa/1u6IVW7'
+
+    # Shared folders
+    mount_options = ["dmode=777", "fmode=777"]
+    opts = if FFI::Platform::IS_WINDOWS
+      { :mount_options => mount_options }
+    else
+      { :nfs => mount_options }
+    end
+
+    overrides.vm.synced_folder(
+      "../../",
+      "/vagrant",
+      opts
+    )
   end
 
   config.vm.provision :chef_solo do |chef|

@@ -1,127 +1,162 @@
-{
-  "sources": {
-    "yum": {
-      "locked_version": "2.4.4"
-    },
-    "mysql": {
-      "locked_version": "4.0.20"
-    },
-    "php": {
-      "locked_version": "1.3.12"
-    },
-    "redisio": {
-      "locked_version": "1.7.1"
-    },
-    "memcached": {
-      "locked_version": "1.7.2"
-    },
-    "nginx": {
-      "locked_version": "2.0.8"
-    },
-    "apache2": {
-      "locked_version": "1.8.14"
-    },
-    "elasticsearch": {
-      "locked_version": "0.3.7"
-    },
-    "jetty": {
-      "locked_version": "0.2.0",
-      "git": "git://github.com/inviqa/chef-jetty.git",
-      "ref": "967f9ecb49c359b3b2b95ee80bab5f24ee18de7a"
-    },
-    "solr": {
-      "locked_version": "1.0.0",
-      "git": "git://github.com/inviqa/chef-solr.git",
-      "ref": "d328b8de18f03ee7cf00f82b6f7a8ce0a3599b88"
-    },
-    "chef-varnish": {
-      "locked_version": "1.0.3",
-      "git": "git://github.com/inviqa/chef-varnish.git",
-      "ref": "dcb5cfdf91006481f3e8b486975e9098c75f6713"
-    },
-    "config-driven-helper": {
-      "locked_version": "1.0.3",
-      "git": "git://github.com/inviqa/chef-config-driven-helper.git",
-      "ref": "5ffba6a0cc34ed0e9399f447ae81bd02ba641951"
-    },
-    "chef-magento": {
-      "locked_version": "1.0.2",
-      "git": "git://github.com/inviqa/chef-magento.git",
-      "ref": "f6feb068fa4d53a89892127f92f3dc5129e269b9"
-    },
-    "chef-php-extra": {
-      "locked_version": "0.4.0",
-      "git": "git://github.com/inviqa/chef-php-extra.git",
-      "ref": "7a743aa34e9082ae56ba8c64d26ee1d1b147a81a"
-    },
-    "openssl": {
-      "locked_version": "1.1.0"
-    },
-    "build-essential": {
-      "locked_version": "1.4.4"
-    },
-    "xml": {
-      "locked_version": "1.2.2"
-    },
-    "yum-epel": {
-      "locked_version": "0.3.4"
-    },
-    "windows": {
-      "locked_version": "1.30.0"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.5"
-    },
-    "iis": {
-      "locked_version": "2.0.2"
-    },
-    "ulimit": {
-      "locked_version": "0.3.2"
-    },
-    "runit": {
-      "locked_version": "1.5.10"
-    },
-    "apt": {
-      "locked_version": "2.3.8"
-    },
-    "bluepill": {
-      "locked_version": "2.3.1"
-    },
-    "rsyslog": {
-      "locked_version": "1.12.2"
-    },
-    "ohai": {
-      "locked_version": "1.1.12"
-    },
-    "java": {
-      "locked_version": "1.21.2"
-    },
-    "monit": {
-      "locked_version": "0.7.1"
-    },
-    "ark": {
-      "locked_version": "0.6.0"
-    },
-    "iptables": {
-      "locked_version": "0.12.0"
-    },
-    "database": {
-      "locked_version": "2.0.0"
-    },
-    "postgresql": {
-      "locked_version": "3.3.4"
-    },
-    "aws": {
-      "locked_version": "2.1.0"
-    },
-    "xfs": {
-      "locked_version": "1.1.0"
-    },
-    "git": {
-      "locked_version": "3.1.0"
-    },
-    "dmg": {
-      "locked_version": "2.2.0"
-    }
-  }
-}
+DEPENDENCIES
+  apache2 (~> 1.8.14)
+  chef-magento
+    git: git://github.com/inviqa/chef-magento.git
+    revision: 5a78f18cf6a30eeaa62cfe5e6182096309b438eb
+    tag: 1.0.4
+  chef-php-extra
+    git: git://github.com/inviqa/chef-php-extra.git
+    revision: 844de2716d5cd53a93cfdab77c41a891f72bc435
+    tag: 0.4.1-legacy-upgrade
+  chef-varnish
+    git: git://github.com/inviqa/chef-varnish.git
+    revision: b648abfb373d3cdac67f89d89f14944a265657a0
+    ref: 1.0.5
+  config-driven-helper
+    git: git://github.com/inviqa/chef-config-driven-helper.git
+    revision: 608bc412a4190d18a3363fce3f122f4295e644df
+    ref: 1.3.0
+  data-bag-merge (~> 0.1.3)
+  elasticsearch (~> 0.3.7)
+  jetty
+    git: git://github.com/inviqa/chef-jetty.git
+    revision: de58c6923d4c6387deabb7ace92ee051a408328d
+    tag: 0.2
+  memcached (~> 1.7.2)
+  mysql (~> 4.0.20)
+  nginx (= 2.4.2)
+  php (~> 1.3.12)
+  php-fpm
+    git: git://github.com/inviqa/cookbook-php-fpm.git
+    revision: 5a7c5b52ace100cd16f9b99543cbd809184a473b
+    tag: 0.6.11
+  project
+    path: site-cookbooks/project
+  redisio (~> 1.7.1)
+  solr
+    git: git://github.com/inviqa/chef-solr.git
+    revision: da9112f7b6f330e9d04467b186228f3f38f1cfe9
+    tag: 1.0.1
+  yum (~> 3.3.2)
+  yum-epel (~> 0.5.1)
+  yum-ius (~> 0.3.0)
+
+GRAPH
+  7-zip (1.0.2)
+    windows (>= 1.2.2)
+  apache2 (1.8.14)
+  apt (2.6.0)
+  ark (0.9.0)
+    7-zip (>= 0.0.0)
+    windows (>= 0.0.0)
+  aws (2.4.0)
+  bluepill (2.3.1)
+    rsyslog (>= 0.0.0)
+  build-essential (1.4.4)
+  chef-magento (1.0.4)
+    apache2 (>= 0.0.0)
+    chef-php-extra (>= 0.0.0)
+    chef-varnish (>= 0.0.0)
+    cron (~> 1.4.0)
+    database (> 1.3.0)
+    git (>= 0.0.0)
+    memcached (>= 0.0.0)
+    mysql (>= 0.0.0)
+    php (>= 0.0.0)
+    solr (>= 0.0.0)
+  chef-php-extra (0.4.1-legacy-upgrade)
+    apt (>= 1.8.4)
+    git (>= 1.0.0)
+  chef-sugar (2.3.0)
+  chef-varnish (1.0.5)
+    apt (>= 0.0.0)
+    yum (>= 0.0.0)
+  chef_handler (1.1.6)
+  config-driven-helper (1.2.0)
+    apache2 (>= 0.0.0)
+    build-essential (>= 0.0.0)
+    database (>= 0.0.0)
+    mysql (>= 0.0.0)
+  cron (1.4.3)
+  data-bag-merge (0.1.4)
+  database (2.0.0)
+    aws (>= 0.0.0)
+    mysql (>= 1.3.0)
+    postgresql (>= 1.0.0)
+    xfs (>= 0.0.0)
+  dmg (2.2.0)
+  elasticsearch (0.3.10)
+    ark (>= 0.2.4)
+    build-essential (>= 0.0.0)
+    java (>= 0.0.0)
+    monit (>= 0.0.0)
+    xml (>= 0.0.0)
+  git (4.0.2)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    runit (>= 1.0.0)
+    windows (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  iis (2.1.5)
+    windows (>= 1.2.6)
+  iptables (0.14.0)
+  java (1.28.0)
+  jetty (0.2.0)
+    iptables (>= 0.0.0)
+    java (>= 0.0.0)
+  memcached (1.7.2)
+    runit (~> 1.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  monit (0.7.4)
+  mysql (4.0.20)
+    build-essential (~> 1.4)
+    openssl (~> 1.1)
+  nginx (2.4.2)
+    apt (~> 2.2)
+    bluepill (~> 2.3)
+    build-essential (~> 1.4)
+    ohai (~> 1.1)
+    runit (~> 1.2)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  ohai (1.1.12)
+  openssl (1.1.0)
+  php (1.3.14)
+    build-essential (>= 0.0.0)
+    iis (>= 0.0.0)
+    mysql (>= 0.0.0)
+    windows (>= 0.0.0)
+    xml (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  php-fpm (0.6.11)
+    apt (>= 0.0.0)
+    yum (>= 3.0.0)
+  postgresql (3.4.6)
+    apt (>= 1.9.0)
+    build-essential (>= 0.0.0)
+    openssl (>= 0.0.0)
+  project (0.0.1)
+  redisio (1.7.1)
+    ulimit (>= 0.1.2)
+  rsyslog (1.12.2)
+  runit (1.5.10)
+    build-essential (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  solr (1.0.0)
+    jetty (>= 0.0.0)
+  ulimit (0.3.2)
+  windows (1.34.6)
+    chef_handler (>= 0.0.0)
+  xfs (1.1.0)
+  xml (1.2.6)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
+  yum (3.3.2)
+  yum-epel (0.5.1)
+    yum (~> 3.0)
+  yum-ius (0.3.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)

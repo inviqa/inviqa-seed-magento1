@@ -1,35 +1,14 @@
 {
   "run_list": [
-    "role[packer]",
-    "recipe[php]",
+    "recipe[data-bag-merge::environment]",
+    "recipe[yum-epel]",
+    "recipe[yum-ius]",
+    "role[db-mysql55]",
+    "role[php54-development]",
     "role[web-nginx]",
-    "role[db]",
     "role[redis]",
     "role[memcache]",
     "role[web-magento]",
     "recipe[config-driven-helper::packages]"
-  ],
-  "nginx": {
-    "sites": {
-      "{{hostname}}": {
-        "docroot": "/vagrant/public"
-      }
-    }
-  },
-  "mysql": {
-    "users": {
-      "magento": {
-        "password": "magento",
-        "database_name": "magentodb"
-      }
-    }
-  },
-  "magento": {
-    "db": {
-      "username": "magento",
-      "password": "magento",
-      "database": "magentodb"
-    },
-    "dir": "/vagrant/public"
-  }
+  ]
 }

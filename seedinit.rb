@@ -1,3 +1,5 @@
+require 'semantic'
+
 unless ::Semantic::Version.new(Hobo::VERSION).satisfies('>= 0.0.15')
   FileUtils.rm_rf Hobo.project_config.project_path
   raise Hobo::UserError.new "This seed requires at least hobo 0.0.15\n\nPlease upgrade with `gem install hobo-inviqa`"
@@ -59,7 +61,7 @@ sync.sync(
 )
 Hobo.ui.separator
 
-Hobo.ui.success "Don't forgot to run `hobo assets upload` once your S3 bucket is created!"
+Hobo.ui.success "Don't forget to run `hobo assets upload` once your S3 bucket is created!"
 Hobo.ui.separator
 
 Hobo.ui.success "Please also run `hobo magento patches apply` to get the latest Magento patches."
