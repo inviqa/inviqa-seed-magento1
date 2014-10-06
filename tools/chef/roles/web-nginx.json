@@ -7,6 +7,27 @@
     "nginx": {
       "default_site_enabled": false
     },
+    "php-fpm": {
+      "package_name": "php54-fpm",
+      "service_name": "php-fpm",
+      "listen_owner": "nginx",
+      "listen_group": "nginx",
+      "pools": {
+        "www": {
+          "enable": true,
+          "max_children": "50",
+          "start_servers": "5",
+          "min_spare_servers": "5",
+          "max_spare_servers": "35",
+          "process_manager": "dynamic",
+          "php_options": {
+            "php_value[error_log]": "/var/log/php-fpm/www-error.log",
+            "php_value[session.save_path]": "/var/lib/php/session",
+            "php_flag[log_errors]": "on"
+          }
+        }
+      }
+    },
     "services": {
       "nginx": ["enable", "start"],
       "php-fpm": ["enable", "start"]
@@ -14,6 +35,7 @@
   },
   "run_list": [
     "recipe[nginx]",
+    "recipe[php-fpm]",
     "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::nginx-sites]"
   ]

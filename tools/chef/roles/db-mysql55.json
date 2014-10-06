@@ -1,0 +1,35 @@
+{
+  "name": "db-mysql55",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "MySQL 5.5 database",
+  "default_attributes": {
+    "services": {
+      "mysql": ["enable", "start"]
+    }
+  },
+  "override_attributes": {
+    "mysql": {
+      "client": {
+        "packages": [
+          "mysql55",
+          "mysql55-devel"
+        ]
+      },
+      "server": {
+        "packages": [
+          "mysql55-devel",
+          "mysql55-server"
+        ]
+      }
+    }
+  },
+  "run_list": [
+    "yum-ius",
+    "recipe[mysql::server]",
+    "recipe[mysql::client]",
+    "recipe[config-driven-helper::services]",
+    "recipe[config-driven-helper::mysql-databases]",
+    "recipe[config-driven-helper::mysql-users]"
+  ]
+}

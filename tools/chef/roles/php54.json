@@ -1,0 +1,31 @@
+{
+  "name": "php54",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP5.4 role",
+  "override_attributes": {
+    "php": {
+      "packages": [
+        "php54",
+        "php54-bcmath",
+        "php54-devel",
+        "php54-fpm",
+        "php54-gd",
+        "php54-mbstring",
+        "php54-mcrypt",
+        "php54-mysql",
+        "php54-pdo",
+        "php54-pecl-imagick",
+        "php54-pecl-memcache",
+        "php54-pecl-redis",
+        "php54-soap",
+        "php54-xml",
+        "php54-xmlrpc"
+      ]
+    }
+  },
+  "run_list": [
+    "yum-ius",
+    "php"
+  ]
+}
