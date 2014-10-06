@@ -11,7 +11,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 set :keep_releases, 5
 
-set :linked_files, [ ]
-set :linked_directories, [ ]
+set :linked_files, [ "public/app/etc/local.xml" ]
+set :linked_directories, ["/public/sitemaps", "/public/media", "/public/var", "/public/staging"]
 
 after "deploy:finalize_update", "deploy:cleanup"
