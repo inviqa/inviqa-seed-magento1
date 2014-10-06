@@ -7,10 +7,19 @@
   "default_attributes": {
     "nginx": {
       "sites": {
-        "{{hostname}}": {
+        "{{name}}": {
           "server_name": "{{hostname}}",
           "docroot": "/vagrant/public",
-          "protocols": ["http", "https"]
+          "protocols": ["http", "https"],
+          "restricted_dirs":  [
+            "/app/",
+            "/includes/",
+            "/lib/",
+            "/media/downloadable/",
+            "/pkginfo/",
+            "/report/config.xml",
+            "/var/"
+          ]
         }
       }
     },
