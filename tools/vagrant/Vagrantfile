@@ -13,14 +13,6 @@ Vagrant.require_version ">= 1.5.0"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Box configuration
-  config.vm.box = 'CentOS-6.5-stack+nginx-0.1.2'
-  config.vm.box_url = 'http://invi.qa/1pBlHjM'
-
-  # Network configuration
-  config.vm.network :private_network, ip: "{{vm_ip}}"
-  config.ssh.forward_agent = true
-
   # vagrant-hostsupdater settings
   config.vm.hostname = "{{hostname}}"
   # config.hostsupdater.aliases = []
