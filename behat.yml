@@ -4,7 +4,7 @@ default:
     SensioLabs\Behat\PageObjectExtension:
       namespaces:
         page: [Page]
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: 'http://{{hostname}}/'
       goutte:
         guzzle_parameters:
