@@ -30,6 +30,11 @@ You can now build the development environment for the first time. In the project
 
     $ hobo vm up
 
+Don't forget to enable Magento Cachebuster module by running the command
+```
+bin/n98-magerun.phar config:set system/guidance_cachebuster/is_enabled 1
+```
+
 You should now be able to access the site at [http://{{hostname}}](http://{{hostname}})
 
 ## Hobo Usage
@@ -79,7 +84,7 @@ As setup issues are encountered please detail with step by step fix instructions
 
 # License
 
-Copyright 2014, Inviqa
+Copyright 2015, Inviqa
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

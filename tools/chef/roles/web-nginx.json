@@ -37,6 +37,7 @@
     "recipe[nginx]",
     "recipe[php-fpm]",
     "recipe[config-driven-helper::services]",
-    "recipe[config-driven-helper::nginx-sites]"
+    "recipe[config-driven-helper::nginx-sites]",
+    "recipe[project::nginx]"
   ]
 }
