@@ -35,3 +35,17 @@ The folder structure is as follows:
 - Berkshelf used instead of librarian-chef for speed and circular resolution
 - Common chef service roles included
 - Hobo files no longer present (it's a gem now)
+
+## Known limitations
+- Due to the same naming scheme used for utility and project buckets naming your project `magento` is not recommended.
+
+   Instead of 
+   `hobo seed plant magento --seed=magento` 
+   try 
+   `hobo seed plant myshop --seed=magento`
+- Uper case letter in project name causes infinite redirect by Magento.
+
+   Instead of 
+   `hobo seed plant testShop --seed=magento` 
+   try 
+   `hobo seed plant testshop --seed=magento`
