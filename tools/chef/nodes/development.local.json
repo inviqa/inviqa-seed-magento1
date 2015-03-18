@@ -9,6 +9,7 @@
     "role[redis]",
     "role[memcache]",
     "role[web-magento]",
-    "recipe[config-driven-helper::packages]"
+    "recipe[config-driven-helper::packages]",
+    "recipe[config-driven-helper::iptables-standard]"
   ]
 }
