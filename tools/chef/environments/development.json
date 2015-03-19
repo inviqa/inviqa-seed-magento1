@@ -30,7 +30,8 @@
           "database_name": "magentodb"
         }
       },
-      "allow_remote_root": true
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0"
     },
 
     "magento": {
