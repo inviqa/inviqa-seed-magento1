@@ -29,7 +29,8 @@
         "magento": {
           "database_name": "magentodb"
         }
-      }
+      },
+      "allow_remote_root": true
     },
 
     "magento": {
