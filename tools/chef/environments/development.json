@@ -29,7 +29,9 @@
         "magento": {
           "database_name": "magentodb"
         }
-      }
+      },
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0"
     },
 
     "magento": {
@@ -40,7 +42,11 @@
       "dir": "/vagrant/public"
     },
 
-    "packages": [ "git" ]
+    "packages": [ "git" ],
+
+    "iptables-standard": {
+      "allowed_incoming_ports": {"mysql": "mysql"}
+    }
   },
 
   "override_attributes": {
