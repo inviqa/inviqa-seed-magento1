@@ -1,5 +1,5 @@
 {
-    "repositories": [                
+    "repositories": [
         {
             "type": "composer",
             "url": "http://packages.firegento.com"
@@ -7,8 +7,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "magento-hackathon/magento-composer-installer": "*",
-        "colinmollenhour/modman": "*"
+        "magento-hackathon/magento-composer-installer": "~3"
     },
     "require-dev": {
         "phpspec/prophecy": "1.2.*",
@@ -44,6 +43,7 @@
         "magento-root-dir": "public/",
         "auto-append-gitignore": true,
         "magento-deploystrategy": "copy",
-        "magento-force": true
+        "magento-force": true,
+        "with-bootstrap-patch": false
     }
 }

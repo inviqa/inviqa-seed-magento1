@@ -4,42 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb40ba8c453cc6129415e2cf9382f514",
+    "hash": "728922bad381f445234149d6d0994988",
     "packages": [
-        {
-            "name": "colinmollenhour/modman",
-            "version": "1.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/colinmollenhour/modman.git",
-                "reference": "1f7167c17ad5d05ef2ec995c93f54f2993dca808"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/colinmollenhour/modman/zipball/1f7167c17ad5d05ef2ec995c93f54f2993dca808",
-                "reference": "1f7167c17ad5d05ef2ec995c93f54f2993dca808",
-                "shasum": ""
-            },
-            "bin": [
-                "modman"
-            ],
-            "type": "library",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Colin Mollenhour"
-                }
-            ],
-            "description": "Module Manager",
-            "homepage": "https://github.com/colinmollenhour/modman",
-            "support": {
-                "source": "https://github.com/colinmollenhour/modman/tree/1.11",
-                "issues": "https://github.com/colinmollenhour/modman/issues"
-            },
-            "time": "2015-03-13 19:41:11"
-        },
         {
             "name": "eloquent/composer-config-reader",
             "version": "2.0.0",
