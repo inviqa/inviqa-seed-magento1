@@ -1,15 +1,18 @@
 {
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "magento-hackathon/magento-composer-installer": "~3"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-master#3bcf4e4ec83dc345d0fff7f22b0641a25403dcc9",
-        "phpspec/prophecy": "dev-master#82d11835df7eccf904ea0c84fbb7304080346bc1",
-        "magetest/magento-phpspec-extension": "dev-develop",
-        "magetest/magento-behat-extension": "dev-feature/refactor",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink-selenium2-driver": "*",
-        "behat/mink-goutte-driver": "1.0.*",
+        "phpspec/prophecy": "1.2.*",
+        "magetest/magento-phpspec-extension": "2.2.*",
+        "magetest/magento-behat-extension": "dev-feature/Behat3",
         "squizlabs/php_codesniffer": "1.*",
         "phpmd/phpmd": "1.*",
         "sebastian/phpcpd": "2.*",
@@ -17,8 +20,8 @@
         "phploc/phploc": "2.*",
         "theseer/phpdox": "0.6.*",
         "theseer/fxsl": "1.0.*@dev",
-        "phpunit/phpunit": "3.7.*",
-        "covex-nn/phpcb": "1.0.*@dev"
+        "covex-nn/phpcb": "1.0.*@dev",
+        "bossa/phpspec2-expect": "~1.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -35,5 +38,12 @@
             ],
             "Mage" : "public/app/code/core"
         }
+    },
+    "extra": {
+        "magento-root-dir": "public/",
+        "auto-append-gitignore": true,
+        "magento-deploystrategy": "copy",
+        "magento-force": true,
+        "with-bootstrap-patch": false
     }
 }
