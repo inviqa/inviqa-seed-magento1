@@ -1,15 +1,17 @@
 {
     "require": {
-        "php": ">=5.4.0"
+        "php": "^5.4.0",
+        "guidance/cachebuster": "~0.5"
     },
     "require-dev": {
         "phpspec/phpspec": "dev-master#3bcf4e4ec83dc345d0fff7f22b0641a25403dcc9",
         "phpspec/prophecy": "dev-master#82d11835df7eccf904ea0c84fbb7304080346bc1",
         "magetest/magento-phpspec-extension": "dev-develop",
-        "magetest/magento-behat-extension": "dev-feature/refactor",
-        "behat/behat": "2.4.*@stable",
+        "magetest/magento-behat-extension": "dev-feature/Behat3",
+        "sensiolabs/behat-page-object-extension": "2.0.*@dev",
+        "behat/behat": "~3.0.0",
         "behat/mink-selenium2-driver": "*",
-        "behat/mink-goutte-driver": "1.0.*",
+        "behat/mink-goutte-driver": "~1.1.0",
         "squizlabs/php_codesniffer": "1.*",
         "phpmd/phpmd": "1.*",
         "sebastian/phpcpd": "2.*",
@@ -20,6 +22,12 @@
         "phpunit/phpunit": "3.7.*",
         "covex-nn/phpcb": "1.0.*@dev"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ],
     "config": {
         "bin-dir": "bin"
     },
@@ -35,5 +43,8 @@
             ],
             "Mage" : "public/app/code/core"
         }
+    },
+    "extra": {
+        "magento-root-dir": "public"
     }
 }

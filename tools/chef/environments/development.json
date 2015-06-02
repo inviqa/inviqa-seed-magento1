@@ -19,7 +19,8 @@
             "/pkginfo/",
             "/report/config.xml",
             "/var/"
-          ]
+          ],
+          "includes" : ["cachebuster.conf"]
         }
       }
     },
