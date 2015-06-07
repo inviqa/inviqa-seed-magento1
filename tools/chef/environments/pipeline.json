@@ -13,6 +13,16 @@
           "server_name": "qa-{{name}}.webpipeline.net",
           "capistrano": {
             "deploy_to": "/var/www/{{name}}-qa"
+          },
+          "magento": {
+            "db": {
+              "username": "{{name}-qa",
+              "database": "{{name}-qa"
+            },
+            "redis": {
+              "database": "0",
+              "full_page_cache_database": "1"
+            }
           }
         },
         "{{name}}-uat": {
@@ -21,6 +31,16 @@
           "server_name": "uat-{{name}}.webpipeline.net",
           "capistrano": {
             "deploy_to": "/var/www/{{name}}-uat"
+          },
+          "magento": {
+            "db": {
+              "username": "{{name}-uat",
+              "database": "{{name}-uat"
+            },
+            "redis": {
+              "database": "2",
+              "full_page_cache_database": "3"
+            }
           }
         }
       }

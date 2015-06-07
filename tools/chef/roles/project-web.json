@@ -19,32 +19,6 @@
     "nginx": {
       "shared_config": {
         "magento": {
-          "protocols": ["http", "https"],
-          "restricted_dirs":  [
-            "/app/",
-            "/includes/",
-            "/lib/",
-            "/media/downloadable/",
-            "/pkginfo/",
-            "/report/config.xml",
-            "/var/"
-          ],
-          "capistrano": {
-            "owner": "deploy",
-            "group": "deploy",
-            "shared_folders": {
-              "readable": {
-                "folders": [
-                ]
-              },
-              "writeable": {
-                "owner": "apache",
-                "group": "apache",
-                "folders": [
-                ]
-              }
-            }
-          }
         }
       }
     },

@@ -12,6 +12,6 @@
     }
   },
   "run_list": [
-    "recipe[chef-magento::config_local]"
+    "recipe[magento-ng::stack]"
   ]
 }
