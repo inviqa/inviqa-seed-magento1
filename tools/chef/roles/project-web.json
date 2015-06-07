@@ -7,7 +7,7 @@
     "recipe[data-bag-merge::environment]",
     "recipe[config-driven-helper::iptables-standard]",
     "role[db-mysql55-client]",
-    "role[php56]",
+    "role[php55]",
     "role[web-nginx]",
     "role[redis]",
     "role[memcache]",
