@@ -1,16 +1,16 @@
 {
-  "name": "php54-development",
+  "name": "php55-development",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "PHP5.4 development role",
+  "description": "PHP5.5 development role",
   "override_attributes": {
     "php": {
       "packages": [
-        "php54-pecl-xdebug"
+        "php55w-pecl-xdebug"
       ]
     }
   },
   "run_list": [
-    "role[php54]"
+    "role[php55]"
   ]
 }

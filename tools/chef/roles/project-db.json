@@ -1,0 +1,11 @@
+{
+  "name": "project-db",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "{{name}} db role",
+  "run_list": [
+    "recipe[data-bag-merge::environment]",
+    "recipe[config-driven-helper::iptables-standard]",
+    "role[db-mysql55-server]"
+  ]
+}

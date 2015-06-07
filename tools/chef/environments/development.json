@@ -8,22 +8,13 @@
     "nginx": {
       "sites": {
         "{{name}}": {
+          "inherits": "magento",
           "server_name": "{{hostname}}",
           "docroot": "/vagrant/public",
-          "protocols": ["http", "https"],
-          "restricted_dirs":  [
-            "/app/",
-            "/includes/",
-            "/lib/",
-            "/media/downloadable/",
-            "/pkginfo/",
-            "/report/config.xml",
-            "/var/"
-          ]
+          "capistrano": false
         }
       }
     },
-
     "mysql": {
       "users": {
         "magento": {

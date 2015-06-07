@@ -1,0 +1,39 @@
+{
+  "name": "pipeline",
+  "description": "",
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+
+  "default_attributes": {
+    "nginx": {
+      "sites": {
+        "{{name}}-qa": {
+          "inherits": "my-app",
+          "docroot": "/var/www/{{name}}-qa/current/public",
+          "server_name": "qa-{{name}}.webpipeline.net",
+          "capistrano": {
+            "deploy_to": "/var/www/{{name}}-qa"
+          }
+        },
+        "{{name}}-uat": {
+          "inherits": "my-app",
+          "docroot": "/var/www/{{name}}-uat/current/public",
+          "server_name": "uat-{{name}}.webpipeline.net",
+          "capistrano": {
+            "deploy_to": "/var/www/{{name}}-uat"
+          }
+        }
+      }
+    },
+    "mysql": {
+      "users": {
+        "{{name}}-qa": {
+          "database_name": "{{name}}-qa"
+        },
+        "{{name}}-uat": {
+          "database_name": "{{name}}-uat"
+        }
+      }
+    }
+  }
+}

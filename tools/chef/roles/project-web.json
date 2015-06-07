@@ -1,0 +1,53 @@
+{
+  "name": "project-web",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "{{name}} web role",
+  "run_list": [
+    "recipe[data-bag-merge::environment]",
+    "recipe[config-driven-helper::iptables-standard]",
+    "role[db-mysql55-client]",
+    "role[php56]",
+    "role[web-nginx]",
+    "role[redis]",
+    "role[memcache]",
+    "recipe[config-driven-helper::capistrano]",
+    "recipe[config-driven-helper::packages]",
+    "role[web-magento]"
+  ],
+  "default_attributes": {
+    "nginx": {
+      "shared_config": {
+        "magento": {
+          "protocols": ["http", "https"],
+          "restricted_dirs":  [
+            "/app/",
+            "/includes/",
+            "/lib/",
+            "/media/downloadable/",
+            "/pkginfo/",
+            "/report/config.xml",
+            "/var/"
+          ],
+          "capistrano": {
+            "owner": "deploy",
+            "group": "deploy",
+            "shared_folders": {
+              "readable": {
+                "folders": [
+                ]
+              },
+              "writeable": {
+                "owner": "apache",
+                "group": "apache",
+                "folders": [
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "packages": [ "git" ]
+  }
+}

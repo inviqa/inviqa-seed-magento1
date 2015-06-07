@@ -1,27 +1,29 @@
 {
   "id": "development",
-  "mysql": {
-    "server_root_password": "984C42CF342f7j6",
-    "server_repl_password": "984C42CF342f7j6",
-    "server_debian_password": "984C42CF342f7j6",
-    "connections": {
-      "default": {
-        "password": "984C42CF342f7j6"
+  "default_attributes": {
+    "mysql": {
+      "server_root_password": "984C42CF342f7j6",
+      "server_repl_password": "984C42CF342f7j6",
+      "server_debian_password": "984C42CF342f7j6",
+      "connections": {
+        "default": {
+          "password": "984C42CF342f7j6"
+        }
+      },
+      "users": {
+        "magento": {
+          "password": "magento"
+        }
       }
     },
-    "users": {
-      "magento": {
+    "magento": {
+      "db": {
         "password": "magento"
       }
+    },
+    "ssl_certs": {
+      "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
+      "/etc/pki/tls/private/key.pem": "{{chef_ssl.key}}"
     }
-  },
-  "magento": {
-    "db": {
-      "password": "magento"
-    }
-  },
-  "ssl_certs": {
-    "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
-    "/etc/pki/tls/private/key.pem": "{{chef_ssl.key}}"
   }
 }

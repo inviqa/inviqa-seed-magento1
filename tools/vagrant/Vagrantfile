@@ -37,8 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     overrides.ssh.forward_agent = true
 
     # Box configuration
-    overrides.vm.box = 'CentOS-6.5-stack+nginx-0.1.4'
-    overrides.vm.box_url = 'http://invi.qa/1u6IVW7'
+    overrides.vm.box = 'CentOS-6.6-stack+php56+nginx-0.2.0'
+    overrides.vm.box_url = 'http://invi.qa/1yPpmmn'
 
     # Shared folders
     mount_options = ["dmode=777", "fmode=777"]
@@ -65,7 +65,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Please do not add additional recipes / roles / configuration for chef in the Vagrantfile
     # If you wish to customize the VM chef config, see tools/chef/nodes/development.local.json
-    chef.environment = "development"
 
     # Utilize config from tools/chef/nodes so it is all in one place
     require 'json'
@@ -77,6 +76,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           chef.send "add_" + $1, $2
         else
           chef.add_recipe recipe
+        end
+      end
+
+      if chef.json['environment']
+        chef.environment = chef.json['environment']
+
+        unless chef.environment == 'development'
+          chef.encrypted_data_bag_secret_key_path = "../chef/encrypted_data_bag_secret"
         end
       end
     end

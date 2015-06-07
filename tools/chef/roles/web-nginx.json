@@ -8,7 +8,6 @@
       "default_site_enabled": false
     },
     "php-fpm": {
-      "package_name": "php54-fpm",
       "service_name": "php-fpm",
       "listen_owner": "nginx",
       "listen_group": "nginx",
@@ -34,6 +33,7 @@
     }
   },
   "run_list": [
+    "recipe[yum-epel]",
     "recipe[nginx]",
     "recipe[php-fpm]",
     "recipe[config-driven-helper::services]",
