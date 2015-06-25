@@ -2,8 +2,8 @@ DEPENDENCIES
   apache2 (~> 1.8.14)
   chef-magento
     git: git://github.com/inviqa/chef-magento.git
-    revision: 5a78f18cf6a30eeaa62cfe5e6182096309b438eb
-    tag: 1.0.4
+    revision: fd61f80a6c41e79905104c4fe675ef349b33b919
+    tag: 1.0.5
   chef-php-extra
     git: git://github.com/inviqa/chef-php-extra.git
     revision: 844de2716d5cd53a93cfdab77c41a891f72bc435
@@ -58,11 +58,11 @@ GRAPH
   bluepill (2.3.1)
     rsyslog (>= 0.0.0)
   build-essential (1.4.4)
-  chef-magento (1.0.4)
+  chef-magento (1.0.5)
     apache2 (>= 0.0.0)
     chef-php-extra (>= 0.0.0)
     chef-varnish (>= 0.0.0)
-    cron (~> 1.4.0)
+    cron (~> 1.4)
     database (> 1.3.0)
     git (>= 0.0.0)
     memcached (>= 0.0.0)
