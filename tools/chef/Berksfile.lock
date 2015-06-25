@@ -25,7 +25,7 @@ DEPENDENCIES
   magento-ng
     git: git@github.com:inviqa/chef-magento-ng.git
     revision: 36c3d05f667a0e0da4a9c7237bb758533f498d46
-    ref: master
+    ref: 0.1.0
   memcached (~> 1.7.2)
   mysql (~> 4.0.20)
   nginx (= 2.4.2)
