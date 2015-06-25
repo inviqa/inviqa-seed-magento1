@@ -11,7 +11,13 @@
           "inherits": "magento",
           "server_name": "{{hostname}}",
           "docroot": "/vagrant/public",
-          "capistrano": false
+          "capistrano": false,
+          "magento": {
+            "db": {
+              "username": "magento",
+              "database": "magentodb"
+            }
+          }
         }
       }
     },
@@ -21,14 +27,6 @@
           "database_name": "magentodb"
         }
       }
-    },
-
-    "magento": {
-      "db": {
-        "username": "magento",
-        "database": "magentodb"
-      },
-      "dir": "/vagrant/public"
     },
 
     "packages": [ "git" ]

@@ -16,10 +16,21 @@
         }
       }
     },
-    "magento": {
-      "db": {
-        "password": "magento"
+    
+    "nginx": {
+      "sites": {
+        "{{name}}": {
+          "magento": {
+            "crypt_key": "fIf5yowN8eB9Wal5huM1ceaS3E3op7aU",
+            "db": {
+              "password": "magento"
+            }
+          }
+        }
       }
+    },
+    "magento": {
+      
     },
     "ssl_certs": {
       "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
