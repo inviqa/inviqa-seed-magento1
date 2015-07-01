@@ -21,7 +21,9 @@
       "sites": {
         "{{name}}": {
           "magento": {
-            "crypt_key": "fIf5yowN8eB9Wal5huM1ceaS3E3op7aU",
+            "app": {
+              "crypt_key": "fIf5yowN8eB9Wal5huM1ceaS3E3op7aU"
+            },
             "db": {
               "password": "magento"
             }
