@@ -14,8 +14,8 @@ DEPENDENCIES
     ref: 1.0.5
   config-driven-helper
     git: git://github.com/inviqa/chef-config-driven-helper.git
-    revision: fa51300af7f25297df6989dfca56cc715ba4423d
-    ref: 1.3.6
+    revision: d806dbf088575ec5ccdb663b6ebb9aef0c9e0cfa
+    ref: 1.4.0
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
   jetty
@@ -24,8 +24,8 @@ DEPENDENCIES
     tag: 0.2
   magento-ng
     git: git@github.com:inviqa/chef-magento-ng.git
-    revision: 855f7a7679709dca9ee06bcf7aa4ac27e1f1c2d5
-    ref: 0.1.1
+    revision: 1b7435f199a0686c2d603f2cf31bcbc3b4d5c452
+    ref: 0.2.0
   memcached (~> 1.7.2)
   mysql (~> 4.0.20)
   nginx (= 2.4.2)
@@ -78,7 +78,7 @@ GRAPH
     apt (>= 0.0.0)
     yum (>= 0.0.0)
   chef_handler (1.1.6)
-  config-driven-helper (1.3.6)
+  config-driven-helper (1.4.0)
     apache2 (~> 1.8)
     build-essential (~> 1.4)
     chef-solo-search (~> 0.5.1)
@@ -112,13 +112,13 @@ GRAPH
   iis (2.1.6)
     windows (>= 1.34.6)
   iptables (0.14.1)
-  iptables-ng (2.2.6)
+  iptables-ng (2.2.7)
   java (1.29.0)
   jetty (0.2.0)
     iptables (>= 0.0.0)
     java (>= 0.0.0)
-  magento-ng (0.1.1)
-    config-driven-helper (~> 1.3.5)
+  magento-ng (0.2.0)
+    config-driven-helper (~> 1.4)
     cron (~> 1.4)
     php-fpm (>= 0.0.0)
   memcached (1.7.2)
