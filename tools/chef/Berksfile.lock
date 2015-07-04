@@ -44,7 +44,7 @@ DEPENDENCIES
   yum (~> 3.3.2)
   yum-epel (~> 0.5.1)
   yum-ius (~> 0.3.0)
-  yum-webtatic (~> 0.3.0)
+  yum-webtatic (~> 0.4.0)
 
 GRAPH
   7-zip (1.0.2)
@@ -180,6 +180,6 @@ GRAPH
   yum-ius (0.3.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  yum-webtatic (0.3.0)
+  yum-webtatic (0.4.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
