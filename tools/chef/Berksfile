@@ -20,7 +20,7 @@ cookbook 'solr', :github => 'inviqa/chef-solr', :tag => '1.0.1'
 cookbook 'chef-varnish', :github => 'inviqa/chef-varnish', :ref => '1.0.5'
 cookbook 'config-driven-helper', :github => 'inviqa/chef-config-driven-helper', :ref => '1.4.0'
 cookbook 'php-fpm', :github => 'inviqa/cookbook-php-fpm', :tag => '0.6.11'
-cookbook 'magento-ng', :git => 'git@github.com:inviqa/chef-magento-ng.git', :ref => '0.2.0'
+cookbook 'magento-ng', :git => 'git@github.com:inviqa/chef-magento-ng.git', :ref => '0.2.1'
 
 cookbook 'project', :path => 'site-cookbooks/project'
 

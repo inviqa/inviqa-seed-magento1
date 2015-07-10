@@ -24,8 +24,8 @@ DEPENDENCIES
     tag: 0.2
   magento-ng
     git: git@github.com:inviqa/chef-magento-ng.git
-    revision: 1b7435f199a0686c2d603f2cf31bcbc3b4d5c452
-    ref: 0.2.0
+    revision: 8ca7553744d106aca17cfc79802e4f5fa689726b
+    ref: 0.2.1
   memcached (~> 1.7.2)
   mysql (~> 4.0.20)
   nginx (= 2.4.2)
@@ -117,7 +117,7 @@ GRAPH
   jetty (0.2.0)
     iptables (>= 0.0.0)
     java (>= 0.0.0)
-  magento-ng (0.2.0)
+  magento-ng (0.2.1)
     config-driven-helper (~> 1.4)
     cron (~> 1.4)
     php-fpm (>= 0.0.0)
