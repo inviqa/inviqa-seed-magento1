@@ -22,13 +22,17 @@
       }
     },
     "mysql": {
+      "allow_remote_root": true,
+      "bind_address": "0.0.0.0",
       "users": {
         "magento": {
           "database_name": "magentodb"
         }
       }
     },
-
+    "iptables-standard": {
+      "allowed_incoming_ports": {"mysql": "mysql"}
+    },
     "packages": [ "git" ]
   },
 
