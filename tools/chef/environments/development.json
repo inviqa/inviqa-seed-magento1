@@ -33,7 +33,10 @@
     "iptables-standard": {
       "allowed_incoming_ports": {"mysql": "mysql"}
     },
-    "packages": [ "git" ]
+    "packages": [ "git" ],
+    "yum-cron": {
+      "cleanday": 9
+    }
   },
 
   "override_attributes": {
