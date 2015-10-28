@@ -20,7 +20,7 @@
           },
           "php_server_variables": {
             "MAGE_IS_DEVELOPER_MODE": 1
-          }"
+          }
         }
       }
     },
