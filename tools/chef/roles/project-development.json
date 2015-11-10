@@ -12,8 +12,8 @@
   },
   "run_list": [
     "recipe[config-driven-helper::iptables-standard]",
-    "recipe[mailcatcher]",
-    "recipe[mailcatcher::postfix]",
+    "recipe[mailcatcher-ng]",
+    "recipe[mailcatcher-ng::postfix]",
     "role[php55-development]"
   ]
 }
