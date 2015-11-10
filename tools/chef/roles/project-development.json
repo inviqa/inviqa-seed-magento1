@@ -1,0 +1,19 @@
+{
+  "name": "project-db",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "{{name}} db role",
+  "default_attributes": {
+    "iptables-standard": {
+      "allowed_incoming_ports": {
+        "mailcatcher": "1080"
+      }
+    }
+  },
+  "run_list": [
+    "recipe[config-driven-helper::iptables-standard]",
+    "recipe[mailcatcher]",
+    "recipe[mailcatcher::postfix]",
+    "role[php55-development]"
+  ]
+}

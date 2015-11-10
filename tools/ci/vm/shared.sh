@@ -23,6 +23,6 @@ function resolve_dir() {
   pwd -P
 }
 
-RUBY_VERSION=1.9.3-p448
+RUBY_VERSION=2.1.5
 GEMSET_NAME=$(basename $(resolve_dir $(dirname $0)/../../../))
 HOBO_GEMSET_NAME=hobo-0.0.13

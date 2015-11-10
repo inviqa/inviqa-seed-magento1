@@ -3,7 +3,7 @@
     "role[project-pipeline]",
     "role[project-db]",
     "role[project-web]",
-    "role[php55-development]"
+    "role[project-development]"
   ],
   "environment": "development"
 }
