@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ]
 
     # Network configuration
-    overrides.vm.network :private_network, ip: "{{vm_ip}}"
+    overrides.vm.network :private_network, ip: "{{vm_ip}}", netmask: "255.255.0.0"
     overrides.ssh.forward_agent = true
 
     # Shared folders

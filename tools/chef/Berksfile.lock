@@ -173,7 +173,7 @@ GRAPH
   ulimit (0.3.2)
   windows (1.36.1)
     chef_handler (>= 0.0.0)
-  xfs (1.1.0)
+  xfs (1.1.1)
   xml (1.2.9)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
