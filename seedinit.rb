@@ -1,6 +1,6 @@
 require 'semantic'
 
-if Required::Module.const_defined?(:Hem)
+if defined?(Hem)
   tool_name = 'hem'
 else
   tool_name = 'hobo'
