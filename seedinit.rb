@@ -70,12 +70,12 @@ else
 
   Hem.ui.separator
 
-  Hem.ui.success "Don't forget to run `#{tool_name} assets upload` once your S3 bucket is created!"
+  Hem.ui.success "Don't forget to run `hem assets upload` once your S3 bucket is created!"
   Hem.ui.separator
 end
 
-Hem.ui.success "Please also run `#{tool_name} magento patches apply` to get the latest Magento patches."
-Hem.ui.success "You may have to have run `#{tool_name} vm up` beforehand if you aren't on Linux/OSX"
+Hem.ui.success "Please also run `hem magento patches apply` to get the latest Magento patches."
+Hem.ui.success "You may have to have run `hem vm up` beforehand if you aren't on Linux/OSX"
 Hem.ui.separator
 
 # Overwrite hem README with project README
