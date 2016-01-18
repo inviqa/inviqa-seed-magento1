@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-# ^ Syntax hint
-
-require 'hobo/tasks/magento'
-task "vm:up" => ["magento:initialize-vm"]
