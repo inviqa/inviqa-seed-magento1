@@ -16,7 +16,7 @@ git clone {{git_url}}
 
 2. Install the latest version of Vagrant from [http://www.vagrantup.com/downloads.html](http://www.vagrantup.com/downloads.html)
 
-3. Ensure you have AWS keys correctly configured either using `hobo config` or by setting the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
+3. Ensure you have AWS keys correctly configured either using `hem config` or by setting the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
 
 ## Provision Environment
 
