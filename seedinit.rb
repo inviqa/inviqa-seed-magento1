@@ -1,12 +1,5 @@
 require 'semantic'
 
-if defined?(Hem)
-  tool_name = 'hem'
-else
-  tool_name = 'hobo'
-  Hem = Hobo
-end
-
 def download_magento(magento_seed, magento_edition, magento_version)
   magento_version_parts = magento_version.split('.')
 
@@ -41,9 +34,9 @@ def download_magento(magento_seed, magento_edition, magento_version)
   )
 end
 
-unless ::Semantic::Version.new(Hem::VERSION).satisfies('>= 0.0.15')
-  FileUtils.rm_rf Hem.project_config.project_path
-  raise Hem::UserError.new "This seed requires at least hobo 0.0.15\n\nPlease upgrade with `gem install hobo-inviqa`"
+unless defined?(Hem) && ::Semantic::Version.new(Hem::VERSION).satisfies('1.0.1-beta6')
+  FileUtils.rm_rf Hobo.project_config.project_path
+  raise Hobo::UserError.new "This seed requires at least hem 1.0.1-beta6\n\nPlease upgrade at https://github.com/inviqa/hem"
 end
 
 default_edition = 'enterprise'
