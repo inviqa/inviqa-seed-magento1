@@ -2,8 +2,8 @@
 # ^ Syntax hint
 require 'ffi'
 
-# Ensure version that supports Atlas integration
-Vagrant.require_version '>= 1.7.0'
+# Ensure version that supports Atlas integration and chef installation
+Vagrant.require_version '>= 1.8.0'
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -29,7 +29,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #vb.gui = true
     vb.name = '{{name}}'
     vb.memory = '1024'
-    vb.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0')
 
     # Network configuration
     overrides.vm.network :private_network, ip: "{{vm_ip}}", netmask: "255.255.0.0"
