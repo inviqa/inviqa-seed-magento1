@@ -13,7 +13,9 @@ gem "railsless-deploy", "~> 1.1.2"
 gem "magentify", "~> 0.0.7"
 
 # Execution helpers
-gem 'rubygems-bundler', '~> 1.4.3'
+if Bundler.settings[:path].nil?
+  gem 'rubygems-bundler', '~> 1.4.3'
+end
 
 # CI / testing
 gem 'serverspec', '~> 1.9.0'
