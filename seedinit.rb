@@ -1,19 +1,13 @@
-require 'semantic'
-
 def download_magento(magento_seed, magento_edition, magento_version)
-  magento_version_parts = magento_version.split('.')
-
-  magento_semver = Semantic::Version.new(magento_version_parts[0..2].join('.') + "-pre.#{magento_version_parts[3]}")
-
   sample_data_version = case magento_edition
     when 'enterprise'
-      if magento_semver.satisfies('>= 1.14.0-pre.0')
+      if Gem::Dependency.new('', '>= 1.14').match?('', magento_version)
         '1.14.0.0'
       else
         '1.11.1.0'
       end
     when 'community'
-      if magento_semver.satisfies('>= 1.9.0-pre.0')
+      if Gem::Dependency.new('', '>= 1.9').match?('', magento_version)
         '1.9.0.0'
       else
         '1.6.1.0'
