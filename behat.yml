@@ -1,10 +1,10 @@
 default:
   extensions:
     MageTest\MagentoExtension\Extension: ~
-    SensioLabs\Behat\PageObjectExtension\Extension:
+    SensioLabs\Behat\PageObjectExtension:
       namespaces:
-        page: features\bootstrap\Page
-    Behat\MinkExtension\Extension:
+        page: [Page]
+    Behat\MinkExtension:
       base_url: 'http://{{hostname}}/'
       goutte:
         guzzle_parameters:

@@ -1,39 +1,72 @@
 {
-    "require": {
-        "php": ">=5.4.0"
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packages.firegento.com"
     },
-    "require-dev": {
-        "phpspec/phpspec": "dev-master#3bcf4e4ec83dc345d0fff7f22b0641a25403dcc9",
-        "phpspec/prophecy": "dev-master#82d11835df7eccf904ea0c84fbb7304080346bc1",
-        "magetest/magento-phpspec-extension": "dev-develop",
-        "magetest/magento-behat-extension": "dev-feature/refactor",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink-selenium2-driver": "*",
-        "behat/mink-goutte-driver": "1.0.*",
-        "squizlabs/php_codesniffer": "1.*",
-        "phpmd/phpmd": "1.*",
-        "sebastian/phpcpd": "2.*",
-        "pdepend/pdepend": "1.*",
-        "phploc/phploc": "2.*",
-        "theseer/phpdox": "0.6.*",
-        "theseer/fxsl": "1.0.*@dev",
-        "phpunit/phpunit": "3.7.*",
-        "covex-nn/phpcb": "1.0.*@dev"
+    {
+      "type": "vcs",
+      "url": "https://github.com/jamescowie/composer-patcher.git"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "autoload": {
-        "psr-0": {
-            "MageTest\\PhpSpec\\MagentoExtension": "src",
-            "": [
-                "public/app/code/local",
-                "public/app/code/community",
-                "public/app/code/core",
-                "public/app",
-                "public/lib"
-            ],
-            "Mage" : "public/app/code/core"
-        }
+    {
+      "type": "vcs",
+      "url": "git@github.com:inviqa/magento-version-checker.git"
     }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "inviqa/magento-version-checker": "*",
+    "magento-hackathon/magento-composer-installer": "~3",
+    "jamescowie/composer-patcher": "dev-master"
+  },
+  "require-dev": {
+    "phpspec/prophecy": "1.2.*",
+    "magetest/magento-phpspec-extension": "2.2.*",
+    "magetest/magento-behat-extension": "dev-feature/Behat3",
+    "squizlabs/php_codesniffer": "1.*",
+    "phpmd/phpmd": "1.*",
+    "sebastian/phpcpd": "2.*",
+    "pdepend/pdepend": "1.*",
+    "phploc/phploc": "2.*",
+    "theseer/phpdox": "0.6.*",
+    "theseer/fxsl": "1.0.*@dev",
+    "covex-nn/phpcb": "1.0.*@dev",
+    "bossa/phpspec2-expect": "~1.0"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-0": {
+      "MageTest\\PhpSpec\\MagentoExtension": "src",
+      "": [
+        "public/app/code/local",
+        "public/app/code/community",
+        "public/app/code/core",
+        "public/app",
+        "public/lib"
+      ],
+      "Mage" : "public/app/code/core"
+    }
+  },
+  "extra": {
+    "magento-root-dir": "public/",
+    "auto-append-gitignore": true,
+    "magento-deploystrategy": "copy",
+    "magento-force": true,
+    "with-bootstrap-patch": false,
+    "patches": {
+      "magento": {
+        "autoloader-patch": {
+          "title": "Allow composer autoloader to be applied to Mage.php",
+          "url": "https://raw.githubusercontent.com/inviqa/magento-patches/magento-composer-autoloader-patch/composer-autoloader/0001-Adding-Composer-autoloader-to-Mage.patch?token=AA3sXKf7NEkV25PjHZcpYlQOsUezdD7Rks5VUkqNwA%3D%3D"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [ "Inviqa\\Command::patch" ],
+    "post-update-cmd": [ "Inviqa\\Command::patch" ]
+  },
+  "minimum-stability": "dev"
 }
