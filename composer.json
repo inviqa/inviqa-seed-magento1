@@ -3,11 +3,8 @@
         "php": ">=5.4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-master#3bcf4e4ec83dc345d0fff7f22b0641a25403dcc9",
-        "phpspec/prophecy": "dev-master#82d11835df7eccf904ea0c84fbb7304080346bc1",
         "magetest/magento-phpspec-extension": "dev-develop",
         "magetest/magento-behat-extension": "dev-feature/refactor",
-        "behat/behat": "2.4.*@stable",
         "behat/mink-selenium2-driver": "*",
         "behat/mink-goutte-driver": "1.0.*",
         "squizlabs/php_codesniffer": "1.*",
