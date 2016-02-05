@@ -22,6 +22,11 @@
         }
       }
     },
-    "packages": [ "git" ]
+    "packages": [ "git" ],
+    "php": {
+      "directives": {
+        "date.timezone": "Europe/London"
+      }
+    }
   }
 }
