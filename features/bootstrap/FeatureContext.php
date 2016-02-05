@@ -1,8 +1,7 @@
 <?php
 
 use MageTest\MagentoExtension\Context\MagentoContext;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Exception\PendingException;
+use Behat\Behat\Tester\Exception\PendingException;
 
 /**
  * Default features context.

@@ -1,10 +1,10 @@
 default:
   extensions:
     MageTest\MagentoExtension\Extension: ~
-    SensioLabs\Behat\PageObjectExtension\Extension:
+    SensioLabs\Behat\PageObjectExtension:
       namespaces:
-        page: features\bootstrap\Page
-    Behat\MinkExtension\Extension:
+        page: [Page]
+    Behat\MinkExtension:
       base_url: 'http://{{hostname}}/'
       goutte:
         guzzle_parameters:
@@ -22,7 +22,7 @@ default:
 
 phantomjs:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: 'http://{{hostname}}/'
       selenium2:
         wd_host: http://localhost:4444/wd/hub
