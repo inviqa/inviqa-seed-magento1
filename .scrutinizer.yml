@@ -1,0 +1,90 @@
+tools:
+  external_code_coverage: false
+  php_code_coverage: false
+  php_code_sniffer:
+    config: { standard: 'Ecg' }
+  php_changetracking: false
+  php_sim: true
+  php_cs_fixer: false
+  php_mess_detector: true
+  php_pdepend: true
+  php_analyzer: true
+  sensiolabs_security_checker: true
+
+filter:
+  paths:
+    - 'public/app/code/local/*'
+    - 'public/app/design/frontend/*'
+    - 'public/skin/frontend/*'
+  excluded_paths:
+    - 'public/app/design/frontend/base'
+    - 'public/app/design/frontend/enterprise'
+    - 'public/skin/frontend/base'
+    - 'public/skin/frontend/enterprise'
+    - 'public/app/code/local/*/*/data/*'
+    - 'public/app/code/local/*/*/sql/*'
+
+checks:
+  php:
+    custom_coding_standard:
+      git_repository: 'https://github.com/inviqa/magento-phpcs-coding-standard.git'
+      git_version: 'origin/master'
+      ruleset_path: 'ruleset.xml'
+
+build:
+  environment:
+    ruby: 2.2.0
+    node: 'v5.1.0'
+    php:
+      version: 5.6.16
+      ini:
+        # Mailcatcher integration
+        smtp_port: 1025
+        sendmail_path: /usr/bin/env catchmail -f test.sender@{{hostname}}
+    hosts:
+      "{{hostname}}": '127.0.0.1'
+    apache2:
+      modules: ['rewrite', 'ssl']
+      sites:
+        magento_app:
+          web_root: 'public/'
+          host: '{{hostname}}'
+
+  dependencies:
+    before:
+      # Disable XDebug (it kills behat tests)
+      - sed -i 's/zend_extension=/;zend_extension=/' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+      # Add SSL virtual host
+      - cat /etc/apache2/sites-enabled/magento_app*.conf | sed "s/<VirtualHost \*:80>/<VirtualHost *:443>\nSSLEngine On\nSSLCertificateFile \/etc\/ssl\/certs\/ssl-cert-snakeoil.pem\nSSLCertificateKeyFile \/etc\/ssl\/private\/ssl-cert-snakeoil.key/" > /etc/apache2/sites-enabled/{{hostname}}.ssl.conf && sudo service apache2 restart
+      # Symlink MySQL socket to where PHP looks for it
+      - ln -s /var/run/mysqld/mysqld.sock /tmp/mysql.sock
+      # Avoid caching js/css assets
+      - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_cachebuster_apache.conf && cat magento_cachebuster_apache.conf >> public/.htaccess
+      # Install mailcatcher
+      - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/install_mailcatcher.sh && bash install_mailcatcher.sh
+      # Download Behat running script
+      - mkdir -p bin && wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/run_behat_firefox_magento.sh -O bin/run_behat_firefox_magento.sh
+
+
+    override:
+      - { command: 'composer install --no-interaction', idle_timeout: 600 }
+      - { command: 'wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/install_firefox.sh && bash install_firefox.sh' }
+
+    project_setup:
+      before:
+        - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_local.xml -O public/app/etc/local.xml
+        - sed -i'' "s/{{crypt_key}}/$MAGENTO_CRYPT_KEY/" public/app/etc/local.xml
+        - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_assets.sh
+        - { command: 'bash magento_assets.sh --applicator=sqldump', idle_timeout: 600 }
+        - bin/n98-magerun cache:disable full_page
+
+    tests:
+      override:
+        - vendor/phpspec/phpspec/bin/phpspec r -fprogress
+        - { command: 'bash bin/run_behat_firefox_magento.sh', idle_timeout: 180 }
+
+  cache:
+    directories: [ vendor/, bin/, .gems/, tools/assets/ ]
+
+# inherit the next configuration down the chain
+inherit: true
