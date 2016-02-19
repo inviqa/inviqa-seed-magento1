@@ -16,10 +16,9 @@
     "role[web-magento]"
   ],
   "default_attributes": {
-    "nginx": {
-      "shared_config": {
-        "magento": {
-        }
+    "magento": {
+      "redis": {
+        "force_standalone": "1"
       }
     },
     "packages": [ "git" ],
