@@ -16,8 +16,8 @@
           },
           "magento": {
             "db": {
-              "username": "{{name}-qa",
-              "database": "{{name}-qa"
+              "username": "{{name}}-qa",
+              "database": "{{name}}-qa"
             },
             "redis": {
               "database": "0",
@@ -34,8 +34,8 @@
           },
           "magento": {
             "db": {
-              "username": "{{name}-uat",
-              "database": "{{name}-uat"
+              "username": "{{name}}-uat",
+              "database": "{{name}}-uat"
             },
             "redis": {
               "database": "2",
