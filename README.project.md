@@ -12,11 +12,15 @@ git clone {{git_url}}
 
 ## Install Dependencies
 
+Ensure that the dependencies are set-up:
+
 1. Install the latest version of Hem from https://github.com/inviqa/hem
 
 2. Install the latest version of Vagrant from [http://www.vagrantup.com/downloads.html](http://www.vagrantup.com/downloads.html)
 
 3. Ensure you have AWS keys correctly configured either using `hem config` or by setting the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
+
+If you have performed any of these steps for other seeds/projects you do not need to perform them again here.
 
 ## Provision Environment
 
