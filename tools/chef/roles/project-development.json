@@ -14,6 +14,6 @@
     "recipe[config-driven-helper::iptables-standard]",
     "recipe[mailcatcher-ng]",
     "recipe[mailcatcher-ng::postfix]",
-    "role[php55-development]"
+    "role[php56-development]"
   ]
 }
