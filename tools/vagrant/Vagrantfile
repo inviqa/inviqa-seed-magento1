@@ -21,8 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.cache.auto_detect = true
   
   # Box configuration
-  config.vm.box = 'inviqa/centos-6-stack-php55'
-  config.vm.box_version = '~> 0.3'
+  config.vm.box = 'inviqa/centos-7-stack-php56'
+  config.vm.box_version = '~> 1.0'
 
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb, overrides|
@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     # Do not add site-cookbooks to this
     # Berkshelf will copy any site-cookbooks defined in the Berksfile
-    chef.version = '11.18.12'
+    chef.version = '12.8'
     chef.channel = 'stable'
 
     chef.cookbooks_path = "../chef/cookbooks"

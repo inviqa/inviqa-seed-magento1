@@ -4,12 +4,29 @@
   "json_class": "Chef::Role",
   "description": "Redis server role",
   "default_attributes": {
+    "redisio": {
+      "package_install": true,
+      "package_name": "redis30u",
+      "safe_install": false,
+      "default_settings": {
+        "loglevel": "warning",
+        "unixsocket": "/var/run/redis.sock",
+        "unixsocketperm": "777"
+      },
+      "servers": [
+        {
+          "name": "master",
+          "port": "6379"
+        }
+      ]
+    },
     "services": {
       "redis6379": ["enable", "start"]
     }
   },
   "run_list": [
-    "recipe[redisio::install]",
+    "recipe[yum-ius]",
+    "recipe[redisio]",
     "recipe[redisio::enable]",
     "recipe[config-driven-helper::services]"
   ]

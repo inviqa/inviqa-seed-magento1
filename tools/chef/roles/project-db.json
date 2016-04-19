@@ -6,6 +6,6 @@
   "run_list": [
     "recipe[data-bag-merge::environment]",
     "recipe[config-driven-helper::iptables-standard]",
-    "role[db-mysql55-server]"
+    "role[db-mysql56-server]"
   ]
 }

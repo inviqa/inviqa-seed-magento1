@@ -2,7 +2,7 @@
   "name": "db-mysql55-server",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "MySQL 5.5 database server",
+  "description": "MySQL 5.6 database server",
   "default_attributes": {
     "services": {
       "mysql": ["enable", "start"]
@@ -10,16 +10,19 @@
   },
   "override_attributes": {
     "mysql": {
+      "version": "5.6",
       "server": {
+        "slow_query_log": true,
+        "slow_query_log_file": "/var/log/mysql/slow.log",
         "packages": [
-          "mysql55-devel",
-          "mysql55-server"
+          "Percona-Server-devel-56",
+          "Percona-Server-server-56"
         ]
       }
     }
   },
   "run_list": [
-    "yum-ius",
+    "recipe[yum-percona]",
     "recipe[mysql::server]",
     "recipe[config-driven-helper::services]",
     "recipe[config-driven-helper::mysql-databases]",
