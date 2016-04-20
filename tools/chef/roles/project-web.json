@@ -9,7 +9,7 @@
     "role[db-mysql56-client]",
     "role[php56]",
     "role[web-nginx]",
-    "role[redis]",
+    "role[redis30]",
     "role[memcache]",
     "recipe[config-driven-helper::capistrano]",
     "recipe[config-driven-helper::packages]",
