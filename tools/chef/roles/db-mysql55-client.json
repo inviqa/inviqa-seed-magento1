@@ -1,0 +1,20 @@
+{
+  "name": "db-mysql55-client",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "MySQL 5.5 database client",
+  "override_attributes": {
+    "mysql": {
+      "client": {
+        "packages": [
+          "mysql55",
+          "mysql55-devel"
+        ]
+      }
+    }
+  },
+  "run_list": [
+    "yum-ius",
+    "recipe[mysql::client]"
+  ]
+}

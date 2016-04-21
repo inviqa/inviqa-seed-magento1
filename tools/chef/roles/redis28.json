@@ -1,0 +1,16 @@
+{
+  "name": "redis28",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Redis 2.8 (source build) server role",
+  "default_attributes": {
+    "services": {
+      "redis6379": ["enable", "start"]
+    }
+  },
+  "run_list": [
+    "recipe[redisio]",
+    "recipe[redisio::enable]",
+    "recipe[config-driven-helper::services]"
+  ]
+}

@@ -22,10 +22,11 @@ The folder structure is as follows:
 ## Technologies
 
 - Packer stack+nginx base box
-- Chef 11 w/ roles for common services
+- Chef 12 w/ roles for common services
 - Capistrano 2 w/ custom helpers
 - Vagrant 1.7+
 - knife-solo
 - composer
-- nginx (default), apache - available as different Chef roles
-- php54, php55, php56 - available as different Chef roles
+- Nginx 1.8 (default), Apache httpd - available as different Chef roles
+- PHP 5.5, PHP 5.6 - available as different Chef roles
+- Percona MySQL 5.6
