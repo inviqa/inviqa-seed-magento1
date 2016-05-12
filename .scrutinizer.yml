@@ -65,23 +65,22 @@ build:
       # Download Behat running script
       - mkdir -p bin && wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/run_behat_firefox_magento.sh -O bin/run_behat_firefox_magento.sh
 
-
     override:
       - { command: 'composer install --no-interaction', idle_timeout: 600 }
       - { command: 'wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/install_firefox.sh && bash install_firefox.sh' }
 
-    project_setup:
-      before:
-        - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_local.xml -O public/app/etc/local.xml
-        - sed -i'' "s/{{crypt_key}}/$MAGENTO_CRYPT_KEY/" public/app/etc/local.xml
-        - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_assets.sh
-        - { command: 'bash magento_assets.sh --applicator=sqldump', idle_timeout: 600 }
-        - bin/n98-magerun cache:disable full_page
+  project_setup:
+    before:
+      - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_local.xml -O public/app/etc/local.xml
+      - sed -i'' "s/{{crypt_key}}/$MAGENTO_CRYPT_KEY/" public/app/etc/local.xml
+      - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_assets.sh
+      - { command: 'bash magento_assets.sh --applicator=sqldump', idle_timeout: 600 }
+      - bin/n98-magerun cache:disable full_page
 
-    tests:
-      override:
-        - vendor/phpspec/phpspec/bin/phpspec r -fprogress
-        - { command: 'bash bin/run_behat_firefox_magento.sh', idle_timeout: 180 }
+  tests:
+    override:
+      - vendor/phpspec/phpspec/bin/phpspec r -fprogress
+      - { command: 'bash bin/run_behat_firefox_magento.sh', idle_timeout: 180 }
 
   cache:
     directories: [ vendor/, bin/, .gems/, tools/assets/ ]
