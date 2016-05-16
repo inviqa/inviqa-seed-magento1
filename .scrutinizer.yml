@@ -75,7 +75,7 @@ build:
       - sed -i'' "s/{{crypt_key}}/$MAGENTO_CRYPT_KEY/" public/app/etc/local.xml
       - wget https://raw.githubusercontent.com/inviqa/scrutinizer-public-scripts/master/magento_assets.sh
       - { command: 'bash magento_assets.sh --applicator=sqldump', idle_timeout: 600 }
-      - bin/n98-magerun cache:disable full_page
+      - bin/n98-magerun.phar cache:disable full_page
 
   tests:
     override:
