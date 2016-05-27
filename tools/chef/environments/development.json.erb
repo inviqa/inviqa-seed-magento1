@@ -7,9 +7,9 @@
   "default_attributes": {
     "nginx": {
       "sites": {
-        "{{name}}": {
+        "<%= config.name %>": {
           "inherits": "magento",
-          "server_name": "{{hostname}}",
+          "server_name": "<%= config.hostname %>",
           "docroot": "/vagrant/public",
           "capistrano": false,
           "magento": {

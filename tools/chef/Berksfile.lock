@@ -7,6 +7,7 @@ DEPENDENCIES
   config-driven-helper (~> 2.0)
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
+  java (~> 1.39)
   jetty
     git: git://github.com/inviqa/chef-jetty.git
     revision: de58c6923d4c6387deabb7ace92ee051a408328d

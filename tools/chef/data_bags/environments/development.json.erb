@@ -2,12 +2,12 @@
   "id": "development",
   "default_attributes": {
     "mysql": {
-      "server_root_password": "984C42CF342f7j6",
-      "server_repl_password": "984C42CF342f7j6",
-      "server_debian_password": "984C42CF342f7j6",
+      "server_root_password": <%= JSON.dump(config.tmp.mysql_root_password) %>,
+      "server_repl_password": <%= JSON.dump(config.tmp.mysql_repl_password) %>,
+      "server_debian_password": <%= JSON.dump(config.tmp.mysql_debian_password) %>,
       "connections": {
         "default": {
-          "password": "984C42CF342f7j6"
+          "password": <%= JSON.dump(config.tmp.mysql_root_password) %>
         }
       },
       "users": {
@@ -16,10 +16,9 @@
         }
       }
     },
-    
     "nginx": {
       "sites": {
-        "{{name}}": {
+        "<%= config.name %>": {
           "magento": {
             "app": {
               "crypt_key": "fIf5yowN8eB9Wal5huM1ceaS3E3op7aU"
@@ -31,12 +30,9 @@
         }
       }
     },
-    "magento": {
-      
-    },
     "ssl_certs": {
-      "/etc/pki/tls/certs/cert.pem": "{{chef_ssl.cert}}",
-      "/etc/pki/tls/private/key.pem": "{{chef_ssl.key}}"
+      "/etc/pki/tls/certs/cert.pem": <%= JSON.dump(config.tmp.chef_ssl[:cert]) %>,
+      "/etc/pki/tls/private/key.pem": <%= JSON.dump(config.tmp.chef_ssl[:key]) %>
     }
   }
 }

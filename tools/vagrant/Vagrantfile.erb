@@ -14,7 +14,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # vagrant-hostsupdater settings
-  config.vm.hostname = "{{hostname}}"
+  config.vm.hostname = "<%= config.hostname %>"
   # config.hostsupdater.aliases = []
 
   # vagrant-cachier settings
@@ -27,11 +27,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb, overrides|
     #vb.gui = true
-    vb.name = '{{name}}'
+    vb.name = '<%= config.name %>'
     vb.memory = '1024'
 
     # Network configuration
-    overrides.vm.network :private_network, ip: "{{vm_ip}}", netmask: "255.255.0.0"
+    overrides.vm.network :private_network, ip: "<%= config.vm_ip %>", netmask: "255.255.0.0"
     overrides.ssh.forward_agent = true
 
     # Shared folders

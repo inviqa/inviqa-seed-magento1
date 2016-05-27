@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="{{name}}" default="build">
+<project name="<%= config.name %>" default="build">
   <property name="srcDir" value="${basedir}/public/app/code/local" />
   <target name="build"
   depends="prepare,clean,install,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb"/>

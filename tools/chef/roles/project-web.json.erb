@@ -2,7 +2,7 @@
   "name": "project-web",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "{{name}} web role",
+  "description": "<%= config.name %> web role",
   "run_list": [
     "recipe[data-bag-merge::environment]",
     "recipe[config-driven-helper::iptables-standard]",

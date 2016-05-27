@@ -1,0 +1,59 @@
+{
+  "name": "pipeline",
+  "description": "",
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+
+  "default_attributes": {
+    "nginx": {
+      "sites": {
+        "<%= config.name %>-qa": {
+          "inherits": "my-app",
+          "docroot": "/var/www/<%= config.name %>-qa/current/public",
+          "server_name": "qa-<%= config.name %>.webpipeline.net",
+          "capistrano": {
+            "deploy_to": "/var/www/<%= config.name %>-qa"
+          },
+          "magento": {
+            "db": {
+              "username": "<%= config.name %>-qa",
+              "database": "<%= config.name %>-qa"
+            },
+            "redis": {
+              "database": "0",
+              "full_page_cache_database": "1"
+            }
+          }
+        },
+        "<%= config.name %>-uat": {
+          "inherits": "my-app",
+          "docroot": "/var/www/<%= config.name %>-uat/current/public",
+          "server_name": "uat-<%= config.name %>.webpipeline.net",
+          "capistrano": {
+            "deploy_to": "/var/www/<%= config.name %>-uat"
+          },
+          "magento": {
+            "db": {
+              "username": "<%= config.name %>-uat",
+              "database": "<%= config.name %>-uat"
+            },
+            "redis": {
+              "database": "2",
+              "full_page_cache_database": "3"
+            }
+          }
+        }
+      }
+    },
+    "mysql": {
+      "users": {
+        "<%= config.name %>-qa": {
+          "database_name": "<%= config.name %>-qa"
+        },
+        "<%= config.name %>-uat": {
+          "database_name": "<%= config.name %>-uat"
+        }
+      }
+    }
+  }
+}

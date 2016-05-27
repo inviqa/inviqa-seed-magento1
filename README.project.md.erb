@@ -1,4 +1,4 @@
-# {{name}} Setup
+# <%= config.name %> Setup
 
 Please follow the below steps to get started, if you encounter any issues installing the dependencies or provisioning the vm please check the [Common Issues](#common-issues) section first.
 
@@ -7,7 +7,7 @@ Please follow the below steps to get started, if you encounter any issues instal
 Clone the project into your local file system:
 
 ```bash
-git clone {{git_url}}
+git clone <%= config.git_url %>
 ```
 
 ## Install Dependencies
@@ -24,7 +24,7 @@ You can now build the development environment for the first time. In the project
 
     $ hem vm up
 
-You should now be able to access the site at [http://{{hostname}}](http://{{hostname}})
+You should now be able to access the site at [http://<%= config.hostname %>](http://<%= config.hostname %>)
 
 ## Hem Usage
 
@@ -42,7 +42,7 @@ hem vm mysql  # Connect to the database on the VM
 As setup issues are encountered please detail with step by step fix instructions, and where possible update the project itself to provide a more permanent fix.
 
  - **Ruby stacktrace mentioning 'hostsupdater' during 'hem vm up'**
-   Please remove any {{hostname}} entries from your hosts file and retry
+   Please remove any <%= config.hostname %> entries from your hosts file and retry
 
 # License
 

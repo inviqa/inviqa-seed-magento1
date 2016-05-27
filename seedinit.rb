@@ -28,10 +28,7 @@ def download_magento(magento_seed, magento_edition, magento_version)
   )
 end
 
-unless defined?(Hem) && ::Semantic::Version.new(Hem::VERSION).satisfies('1.0.1-beta6')
-  FileUtils.rm_rf Hobo.project_config.project_path
-  raise Hobo::UserError.new "This seed requires at least hem 1.0.1-beta6\n\nPlease upgrade at https://github.com/inviqa/hem"
-end
+Hem.require_version '>= 1.1.0'
 
 default_edition = 'enterprise'
 editions = ['enterprise', 'community', 'skip']
@@ -74,5 +71,15 @@ Hem.ui.separator
 
 # Overwrite hem README with project README
 old_readme = File.join(Hem.project_config.project_path, 'README.md')
-new_readme = File.join(Hem.project_config.project_path, 'README.project.md')
-FileUtils.mv new_readme, old_readme
+new_readme = File.join(Hem.project_config.project_path, 'README.project.md.erb')
+File.delete old_readme
+FileUtils.mv new_readme, "#{old_readme}.erb"
+
+# Project local VM SSL certificate
+Hem.project_config.tmp.chef_ssl = Hem::Lib::SelfSignedCertGenerator.generate(Hem.project_config.hostname)
+
+# MySQL local VM MySQL passwords
+password = '984C42CF342f7j6' # password still is set in the basebox
+Hem.project_config.tmp.mysql_root_password = password
+Hem.project_config.tmp.mysql_repl_password = password
+Hem.project_config.tmp.mysql_debian_password = password
