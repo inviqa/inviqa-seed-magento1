@@ -28,7 +28,7 @@ def download_magento(magento_seed, magento_edition, magento_version)
   )
 end
 
-Hem.require_version '>= 1.1.0'
+Hem.require_version '>= 1.2.0'
 
 default_edition = 'enterprise'
 editions = ['enterprise', 'community', 'skip']
@@ -70,16 +70,21 @@ Hem.ui.success "You may have to have run `hem vm up` beforehand if you aren't on
 Hem.ui.separator
 
 # Overwrite hem README with project README
-old_readme = File.join(Hem.project_config.project_path, 'README.md')
-new_readme = File.join(Hem.project_config.project_path, 'README.project.md.erb')
+old_readme = 'README.md'
+new_readme = 'README.project.md.erb'
 File.delete old_readme
 FileUtils.mv new_readme, "#{old_readme}.erb"
 
 # Project local VM SSL certificate
-Hem.project_config.tmp.chef_ssl = Hem::Lib::SelfSignedCertGenerator.generate(Hem.project_config.hostname)
+config.tmp.chef_ssl = Hem::Lib::SelfSignedCertGenerator.generate(config.hostname)
 
 # MySQL local VM MySQL passwords
 password = '984C42CF342f7j6' # password still is set in the basebox
-Hem.project_config.tmp.mysql_root_password = password
-Hem.project_config.tmp.mysql_repl_password = password
-Hem.project_config.tmp.mysql_debian_password = password
+config.tmp.mysql_root_password = password
+config.tmp.mysql_repl_password = password
+config.tmp.mysql_debian_password = password
+
+config.locate.Berksfile.patterns = ['tools/chef/Berksfile']
+config.locate.Cheffile.patterns = ['tools/chef/Cheffile']
+config.locate.Gemfile.patterns = ['Gemfile']
+config.locate.Vagrantfile.patterns = ['tools/vagrant/Vagrantfile']

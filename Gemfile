@@ -1,14 +1,30 @@
 source "https://rubygems.org"
 
-# Chef
-gem "berkshelf", "~> 4.3"
-gem "chef", "~> 12.8"
-gem "knife-solo", "~> 0.5.1"
-gem "knife-solo_data_bag", "~> 1.1.0"
+group :chef do
+  gem "berkshelf", "~> 4.3"
+  gem "chef", "~> 12.10.24"
+  gem "knife-solo", "~> 0.6.0"
+  gem "knife-solo_data_bag", "~> 1.1.0"
+end
 
-# Capistrano
-gem "capistrano", "~> 2.15"
-gem "railsless-deploy", "~> 1.1"
+group :chef_development do
+  gem "foodcritic", "~> 6.2"
+  gem "chefspec", "~> 4.6"
+  gem "test-kitchen", "~> 1.8"
+  gem "kitchen-vagrant", "~> 0.20.0"
+  gem "kitchen-docker", "~> 2.3.0"
+  gem "rubocop", "~> 0.40.0"
+end
+
+group :deploy do
+  gem "capistrano", "~> 2.15"
+  gem "railsless-deploy", "~> 1.1"
+end
+
+group :test do
+  # CI / testing
+  gem 'serverspec', '~> 2.31'
+end
 
 # Magento
 gem "magentify", "~> 0.0.7"
@@ -17,6 +33,3 @@ gem "magentify", "~> 0.0.7"
 if Bundler.settings[:path].nil?
   gem 'rubygems-bundler', '~> 1.4.4'
 end
-
-# CI / testing
-gem 'serverspec', '~> 2.31'

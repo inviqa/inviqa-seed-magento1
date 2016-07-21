@@ -1,8 +1,8 @@
 {
-  "name": "project-db",
+  "name": "project-development",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "<%= config.name %> db role",
+  "description": "<%= config.name %> development role",
   "default_attributes": {
     "iptables-standard": {
       "allowed_incoming_ports": {
@@ -11,7 +11,8 @@
     }
   },
   "run_list": [
-    "recipe[config-driven-helper::iptables-standard]",
+    "role[project-base]",
+    "recipe[yum-cron]",
     "recipe[mailcatcher-ng]",
     "recipe[mailcatcher-ng::postfix]",
     "role[php56-development]"

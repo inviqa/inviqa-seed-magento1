@@ -1,6 +1,5 @@
 {
   "run_list": [
-    "role[project-pipeline]",
     "role[project-db]",
     "role[project-web]",
     "role[project-development]"

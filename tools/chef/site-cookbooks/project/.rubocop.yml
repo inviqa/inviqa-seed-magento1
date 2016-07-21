@@ -1,0 +1,9 @@
+---
+AllCops:
+  Include:
+    - Berksfile
+    - Rakefile
+  Exclude:
+    - cookbooks/**/*
+Metrics/LineLength:
+  Max: 120

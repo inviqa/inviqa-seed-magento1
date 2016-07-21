@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     # Do not add site-cookbooks to this
     # Berkshelf will copy any site-cookbooks defined in the Berksfile
-    chef.version = '12.8'
+    chef.version = '12.10'
     chef.channel = 'stable'
 
     chef.cookbooks_path = "../chef/cookbooks"

@@ -31,8 +31,20 @@
         "magento": {
           "database_name": "magentodb"
         }
+      },
+      "tunable": {
+        "max_connections": "50"
       }
     },
+
+    "php-fpm": {
+      "pools": {
+        "www": {
+          "max_spare_servers": "5"
+        }
+      }
+    },
+
     "iptables-standard": {
       "allowed_incoming_ports": {"mysql": "mysql"}
     },

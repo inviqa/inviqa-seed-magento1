@@ -4,15 +4,14 @@
   "json_class": "Chef::Role",
   "description": "<%= config.name %> web role",
   "run_list": [
-    "recipe[data-bag-merge::environment]",
-    "recipe[config-driven-helper::iptables-standard]",
+    "role[project-base]",
     "role[db-mysql56-client]",
     "role[php56]",
     "role[web-nginx]",
     "role[redis30]",
     "role[memcache]",
     "recipe[config-driven-helper::capistrano]",
-    "recipe[config-driven-helper::packages]",
+    "recipe[config-driven-helper::packages-additional]"
     "role[web-magento]"
   ],
   "default_attributes": {
@@ -21,7 +20,9 @@
         "force_standalone": "1"
       }
     },
-    "packages": [ "git" ],
+    "packages-additional": {
+      "git": "install"
+    },
     "php": {
       "directives": {
         "date.timezone": "Europe/London"

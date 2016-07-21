@@ -10,6 +10,8 @@
   },
   "override_attributes": {
     "mysql": {
+      "remove_anonymous_users": true,
+      "remove_test_database": true,
       "version": "5.6",
       "server": {
         "slow_query_log": true,

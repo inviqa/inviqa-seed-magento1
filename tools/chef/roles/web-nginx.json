@@ -5,7 +5,7 @@
   "description": "Nginx HTTP server role",
   "default_attributes": {
     "nginx": {
-      "package": "nginx18",
+      "package_name": "nginx18",
       "default_site_enabled": false,
       "https_variable_emulation": false
     },

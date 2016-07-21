@@ -10,10 +10,17 @@
         "nofile": 1024,
         "memlock": 512
       }
+    },
+    "java": {
+      "jdk_version": "8"
+    },
+    "services": {
+      "elasticsearch": [ "enable", "start" ]
     }
   },
   "run_list": [
     "recipe[java]",
-    "recipe[elasticsearch]"
+    "recipe[elasticsearch]",
+    "recipe[config-driven-helper::services]"
   ]
 }

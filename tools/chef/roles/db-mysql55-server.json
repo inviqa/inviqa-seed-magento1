@@ -10,6 +10,8 @@
   },
   "override_attributes": {
     "mysql": {
+      "remove_anonymous_users": true,
+      "remove_test_database": true,
       "server": {
         "packages": [
           "mysql55-devel",

@@ -4,8 +4,7 @@
   "json_class": "Chef::Role",
   "description": "<%= config.name %> db role",
   "run_list": [
-    "recipe[data-bag-merge::environment]",
-    "recipe[config-driven-helper::iptables-standard]",
+    "role[project-base]",
     "role[db-mysql56-server]"
   ]
 }

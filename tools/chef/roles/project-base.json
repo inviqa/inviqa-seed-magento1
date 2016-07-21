@@ -1,0 +1,19 @@
+{
+  "name": "project-base",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "<%= config.name %> base role",
+  "run_list": [
+    "recipe[data-bag-merge::environment]",
+    "recipe[iptables-ng]",
+    "recipe[iptables-patterns::fail2ban]",
+    "recipe[iptables-patterns::frontend_permissive_ports]",
+    "recipe[ntp]",
+    "recipe[system::timezone]"
+  ],
+  "default_attributes": {
+    "system": {
+      "timezone": "UTC"
+    }
+  }
+}

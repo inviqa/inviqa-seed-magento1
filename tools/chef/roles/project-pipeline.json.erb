@@ -4,6 +4,7 @@
   "json_class": "Chef::Role",
   "description": "<%= config.name %> pipeline role",
   "run_list": [
+    "role[project-base]",
     "recipe[yum-cron]"
   ]
 }

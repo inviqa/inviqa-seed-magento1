@@ -1,0 +1,16 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: inviqa/centos-6-minimal
+  - name: inviqa/centos-7-minimal
+
+suites:
+  - name: default
+    run_list:
+      - recipe[project::default]
+    attributes:
