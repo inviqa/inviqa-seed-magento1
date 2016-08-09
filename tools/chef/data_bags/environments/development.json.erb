@@ -29,10 +29,6 @@
           }
         }
       }
-    },
-    "ssl_certs": {
-      "/etc/pki/tls/certs/cert.pem": <%= JSON.dump(config.tmp.chef_ssl[:cert]) %>,
-      "/etc/pki/tls/private/key.pem": <%= JSON.dump(config.tmp.chef_ssl[:key]) %>
     }
   }
 }

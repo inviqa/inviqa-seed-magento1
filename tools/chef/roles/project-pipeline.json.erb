@@ -5,6 +5,7 @@
   "description": "<%= config.name %> pipeline role",
   "run_list": [
     "role[project-base]",
-    "recipe[yum-cron]"
+    "recipe[yum-cron]",
+    "recipe[config-driven-helper::ssl-cert-self-signed]"
   ]
 }

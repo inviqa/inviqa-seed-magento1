@@ -1,25 +1,24 @@
 {
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.6.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
         "bossa/phpspec2-expect": "~1.0",
-        "behat/behat": "~3.0",
+        "behat/behat": "~3.1",
         "behat/mink-extension": "2.*",
-        "behat/mink-goutte-driver": "1.1.*",
+        "behat/mink-goutte-driver": "1.2.*",
         "behat/mink-selenium2-driver": "1.*",
-        "sensiolabs/behat-page-object-extension": "2.0.*@dev",
+        "sensiolabs/behat-page-object-extension": "2.0.*",
         "magetest/magento-phpspec-extension": "~3.0",
-        "magetest/magento-behat-extension": "dev-feature/Behat3",
-        "squizlabs/php_codesniffer": "1.*",
+        "squizlabs/php_codesniffer": "2.*",
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "2.*",
         "pdepend/pdepend": "2.*",
-        "phploc/phploc": "2.*",
-        "theseer/phpdox": "0.7.*",
-        "theseer/fxsl": "1.0.*@dev",
-        "phpunit/phpunit": "3.7.*",
+        "phploc/phploc": "3.*",
+        "theseer/phpdox": "0.8.*",
+        "theseer/fxsl": "1.1.*",
+        "phpunit/phpunit": "5.4.*",
         "covex-nn/phpcb": "1.*"
     },
     "config": {

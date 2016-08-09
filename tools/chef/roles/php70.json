@@ -1,0 +1,35 @@
+{
+  "name": "php70",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP7.0 role",
+  "override_attributes": {
+    "php-fpm": {
+      "package_name": "php70w-fpm"
+    },
+    "php": {
+      "packages": [
+        "php70w",
+        "php70w-bcmath",
+        "php70w-devel",
+        "php70w-fpm",
+        "php70w-gd",
+        "php70w-mbstring",
+        "php70w-mcrypt",
+        "php70w-mysqlnd",
+        "php70w-opcache",
+        "php70w-pdo",
+        "php70w-pecl-apcu",
+        "php70w-pecl-imagick",
+        "php70w-pecl-redis",
+        "php70w-soap",
+        "php70w-xml",
+        "php70w-xmlrpc"
+      ]
+    }
+  },
+  "run_list": [
+    "yum-webtatic",
+    "php"
+  ]
+}

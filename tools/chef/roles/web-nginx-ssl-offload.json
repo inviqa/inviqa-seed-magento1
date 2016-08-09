@@ -1,0 +1,39 @@
+{
+  "name": "web-nginx-ssl-offload",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Nginx HTTP server role for SSL offloading",
+  "default_attributes": {
+    "nginx": {
+      "package": "nginx18",
+      "default_site_enabled": false,
+      "https_variable_emulation": false,
+      "shared_config": {
+        "ssl_offload": {
+          "type": "ssl_offload",
+          "protocols": ["https"],
+          "disable_default_location_block": true,
+          "php_support": false,
+          "locations": {
+            "/": {
+              "type": "path_not_regex",
+              "mode": "reverse-proxy",
+              "proxy": {
+                "location": "http://127.0.0.1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "services": {
+      "nginx": ["enable", "start"]
+    }
+  },
+  "run_list": [
+    "recipe[yum-webtatic]",
+    "recipe[nginx]",
+    "recipe[config-driven-helper::services]",
+    "recipe[config-driven-helper::nginx-sites]"
+  ]
+}
