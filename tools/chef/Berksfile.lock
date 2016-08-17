@@ -21,6 +21,7 @@ DEPENDENCIES
   ntp (~> 2.0.0)
   php (~> 1.5.0)
   php-fpm (~> 0.7.5)
+  postfix (~> 3.7.0)
   postgresql (~> 3.4)
   project
     path: site-cookbooks/project
@@ -135,7 +136,7 @@ GRAPH
   php-fpm (0.7.6)
     apt (>= 0.0.0)
     yum (>= 3.0)
-  postfix (3.8.0)
+  postfix (3.7.0)
   postgresql (3.4.16)
     apt (>= 1.9.0)
     build-essential (>= 0.0.0)
