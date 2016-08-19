@@ -37,5 +37,8 @@
             ],
             "Mage" : "public/app/code/core"
         }
+    },
+    "extra": {
+        "magento-root-dir": "public"
     }
 }
