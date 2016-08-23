@@ -8,7 +8,7 @@
     "nginx": {
       "sites": {
         "<%= config.name %>-qa": {
-          "inherits": "my-app",
+          "inherits": "magento",
           "docroot": "/var/www/<%= config.name %>-qa/current/public",
           "server_name": "qa-<%= config.name %>.webpipeline.net",
           "capistrano": {
@@ -26,7 +26,7 @@
           }
         },
         "<%= config.name %>-uat": {
-          "inherits": "my-app",
+          "inherits": "magento",
           "docroot": "/var/www/<%= config.name %>-uat/current/public",
           "server_name": "uat-<%= config.name %>.webpipeline.net",
           "capistrano": {
