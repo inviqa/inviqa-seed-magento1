@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 # ^ Syntax hint
 
-require 'hem/tasks/magento'
+Hem.require_version '~> 1.2'
+
+plugins do
+  source 'https://rubygems.org'
+  gem 'hem-tasks-magento1', '~> 1.0'
+end
+
 task "vm:up" => ["magento:initialize-vm"]
