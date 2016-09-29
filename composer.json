@@ -33,7 +33,8 @@
                 "public/app/code/community",
                 "public/app/code/core",
                 "public/app",
-                "public/lib"
+                "public/lib",
+                "src"
             ],
             "Mage" : "public/app/code/core"
         }
