@@ -4,4 +4,4 @@ data_bag_path "./data_bags"
 environment_path "./environments"
 local_mode true
 
-# knife[:secret_file] = "./encrypted_data_bag_secret"
+knife[:secret_file] = "./encrypted_data_bag_secret"

@@ -3,13 +3,7 @@
   "chef_type": "role",
   "json_class": "Chef::Role",
   "description": "Memcache server role",
-  "default_attributes": {
-    "services": {
-      "memcached": [ "enable", "start" ]
-    }
-  },
   "run_list": [
-    "recipe[memcached]",
-    "recipe[config-driven-helper::services]"
+    "recipe[memcached]"
   ]
 }
