@@ -1,13 +1,17 @@
 def download_magento(magento_seed, magento_edition, magento_version)
   sample_data_version = case magento_edition
     when 'enterprise'
-      if Gem::Dependency.new('', '>= 1.14').match?('', magento_version)
+      if Gem::Dependency.new('', '>= 1.14.2.4').match?('', magento_version)
+        '1.14.2.4'
+      elsif Gem::Dependency.new('', '>= 1.14').match?('', magento_version)
         '1.14.0.0'
       else
         '1.11.1.0'
       end
     when 'community'
-      if Gem::Dependency.new('', '>= 1.9').match?('', magento_version)
+      if Gem::Dependency.new('', '>= 1.9.2.4').match?('', magento_version)
+        '1.9.2.4'
+      elsif Gem::Dependency.new('', '>= 1.9').match?('', magento_version)
         '1.9.0.0'
       else
         '1.6.1.0'
