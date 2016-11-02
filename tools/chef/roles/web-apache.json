@@ -17,13 +17,9 @@
     },
     "services": {
       "httpd": ["enable", "start"]
-    },
-    "packages": [
-      "mod_realdoc"
-    ]
+    }
   },
   "run_list": [
-    "recipe[yum-webtatic]",
     "recipe[apache2]",
     "recipe[config-driven-helper::packages]",
     "recipe[config-driven-helper::services]",
