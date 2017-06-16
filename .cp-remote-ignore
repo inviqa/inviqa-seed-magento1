@@ -1,0 +1,25 @@
+# General
+/tools/assets
+/tools/capistrano
+/tools/chef
+/tools/ci/vm
+/tools/vagrant
+.DS_Store
+.git
+.gitignore
+.idea
+*___jb_old___
+*___jb_tmp___
+
+# Composer
+/vendor
+/bin/composer.phar
+
+# Continuous Pipe
+/cp-remote-logs
+/.cp-remote-settings.yml
+/.cp-remote-env-settings.yml
+/.cp-remote-ignore
+
+# Frontend
+node_modules

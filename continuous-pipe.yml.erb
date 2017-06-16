@@ -1,0 +1,216 @@
+variables:
+  DATABASE_NAME: <%= config.name %>
+  DATABASE_USER: <%= config.name %>
+  CP_ENVIRONMENT:
+    name: CP_ENVIRONMENT
+    expression: '"<%= config.name %>" ~ code_reference.branch'
+  CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
+  ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
+  ASSETS_ENV: ''
+
+pipelines:
+  - name: Production
+    tasks:
+      - web_image
+      - storage
+      - reserve_ip
+      - migration
+      - deployment
+    condition: 'code_reference.branch in ["develop", "qa", "staging", "production"]'
+  - name: Pull Requests
+    tasks:
+      - web_image
+      - storage
+      - reserve_ip
+      - migration
+      - deployment
+    condition: '"Ready for review" in pull_request.labels'
+    variables:
+      ASSESTS_ENV: development
+  - name: Remote Development
+    tasks:
+      - web_image
+      - storage
+      - reserve_ip
+      - migration
+      - deployment
+    variables:
+      DEVELOPMENT_MODE: 0
+      ASSESTS_ENV: development
+    condition: 'code_reference.branch matches "#^cpdev/#"'
+
+defaults:
+  cluster: ${CLUSTER}
+  environment:
+    name: '"${CP_ENVIRONMENT}"'
+
+tasks:
+  web_image:
+    build:
+      environment:
+        - name: GITHUB_TOKEN
+          value: ${GITHUB_TOKEN}
+        - name: AWS_ACCESS_KEY_ID
+          value: ${AWS_ACCESS_KEY_ID}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: ${AWS_SECRET_ACCESS_KEY}
+        - name: ASSETS_S3_BUCKET
+          value: ${ASSETS_S3_BUCKET}
+        - name: ASSETS_ENV
+          value: ${ASSETS_ENV}
+
+    services:
+      web:
+        image: quay.io/organisation/<%= config.name %>
+
+  storage:
+    deploy:
+      services:
+        mysql:
+          specification:
+            volumes:
+              - type: persistent
+                name: database-volume
+                capacity: 5Gi
+                storage_class: default
+
+            volume_mounts:
+              - name: database-volume
+                mount_path: /var/lib/mysql
+
+            command:
+              - /usr/local/bin/docker-entrypoint.sh
+              - mysqld
+              - --ignore-db-dir=lost+found
+              - --max_allowed_packet=128M
+
+            ports:
+              - 3306
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 250Mi
+              limits:
+                cpu: 500m
+                memory: 2Gi
+
+            environment_variables:
+              MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+              MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+              MYSQL_DATABASE: ${DATABASE_NAME}
+              MYSQL_USER: ${DATABASE_USER}
+
+  reserve_ip:
+    deploy:
+      services:
+        web:
+          endpoints:
+            - name: web
+              cloud_flare_zone:
+                zone_identifier: ${CLOUD_FLARE_ZONE}
+                authentication:
+                    email: ${CLOUD_FLARE_EMAIL}
+                    api_key: ${CLOUD_FLARE_API_KEY}
+                proxied: true
+                record_suffix: ${CP_ENVIRONMENT_DOMAIN_SUFFIX}
+              ingress:
+                class: nginx
+                host_suffix: ${CP_ENVIRONMENT_DOMAIN_SUFFIX}
+          specification:
+            source:
+              image: continuouspipe/landing-page
+              tag: latest
+
+            ports:
+              - 80
+              - 443
+
+      filter:
+        expression: 'tasks.storage.services.mysql.created'
+
+  migration:
+    run:
+      image:
+        from_service: web
+
+      commands:
+        - container migrate
+
+      environment_variables: &WEB_ENV_VARS
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
+        ASSETS_ENV: ${ASSETS_ENV}
+        ASSETS_FILES_ENABLED: false
+        APP_USER_LOCAL: false
+        DATABASE_NAME: ${DATABASE_NAME}
+        DATABASE_USER: ${DATABASE_USER}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+        AUTH_HTTP_ENABLED: true
+        AUTH_HTTP_HTPASSWD: ${AUTH_HTTP_HTPASSWD}
+        AUTH_IP_WHITELIST_ENABLED: true
+        AUTH_HTTP_WHITELIST_IPS: ${AUTH_HTTP_WHITELIST_IPS}
+        TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES}
+
+  deployment:
+    deploy:
+      services:
+        web:
+          specification:
+            environment_variables:
+              <<: *WEB_ENV_VARS
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 50Mi
+
+              limits:
+                cpu: 1
+                memory: 2G
+
+            ports:
+              - 80
+              - 443
+
+          deployment_strategy:
+            readiness_probe:
+              type: tcp
+              port: 80
+
+            liveness_probe:
+              type: exec
+              command:
+                - curl
+                - -k
+                - -I
+                - -X GET
+                - https://localhost/
+              initial_delay_seconds: 30
+              period_seconds: 300 # 5 minutes
+              success_threshold: 1
+              failure_threshold: 5
+
+        cron:
+          specification:
+            accessibility:
+              from_cluster: false
+
+            source:
+              from_service: web
+
+            ports: []
+
+            environment_variables:
+              <<: *WEB_ENV_VARS
+              START_MODE: cron
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 20Mi
+
+              limits:
+                cpu: 1
+                memory: 1G

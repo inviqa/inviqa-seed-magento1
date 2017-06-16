@@ -1,0 +1,28 @@
+# General
+tools/assets
+tools/capistrano
+tools/chef
+tools/ci/vm
+tools/vagrant
+**/.DS_Store
+**/.git
+**/.gitignore
+**/.idea
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Composer
+vendor
+bin/composer.phar
+
+# Continuous Pipe
+cp-remote-logs
+.cp-remote-settings.yml
+
+# Frontend
+**/.sass-cache/*
+**/*.css.map
+**/node_modules/*

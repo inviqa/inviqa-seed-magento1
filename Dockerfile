@@ -1,0 +1,11 @@
+FROM quay.io/continuouspipe/php7-nginx:stable
+
+ARG GITHUB_TOKEN=
+ARG ASSETS_S3_BUCKET=
+ARG ASSETS_ENV=
+ARG ASSETS_DATABASE_ENABLED=false
+ARG AWS_ACCESS_KEY_ID=
+ARG AWS_SECRET_ACCESS_KEY=
+
+COPY . /app
+RUN container build
