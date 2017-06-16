@@ -4,15 +4,17 @@ services:
     build: .
     depends_on:
       - mysql
+      - redis
+      - memcached
     environment:
       ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
       ASSETS_ENV: development
       ASSETS_CLEANUP: 'false'
       AWS_ACCESS_KEY_ID:
       AWS_SECRET_ACCESS_KEY:
-      DATABASE_NAME: <%= config.name %>
-      DATABASE_USER: <%= config.name %>
-      DATABASE_PASSWORD: <%= config.name %>
+      DATABASE_NAME: magentodb
+      DATABASE_USER: magento
+      DATABASE_PASSWORD: magento
       DATABASE_HOST: mysql
     expose:
       - 80
@@ -27,6 +29,12 @@ services:
     image: quay.io/continuouspipe/mysql5.7:stable
     environment:
       MYSQL_ROOT_PASSWORD: <%= config.tmp.mysql_root_password %>
-      MYSQL_DATABASE: <%= config.name %>
-      MYSQL_USER: <%= config.name %>
-      MYSQL_PASSWORD: <%= config.name %>
+      MYSQL_DATABASE: magentodb
+      MYSQL_USER: magento
+      MYSQL_PASSWORD: magento
+
+  redis:
+    image: quay.io/continuouspipe/redis3:stable
+
+  memcached:
+    image: quay.io/continuouspipe/memcached1.4:stable
