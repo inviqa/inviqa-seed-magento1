@@ -1,4 +1,4 @@
-FROM quay.io/continuouspipe/php7-nginx:stable
+FROM quay.io/continuouspipe/magento1-nginx-php5.6:stable
 
 ARG GITHUB_TOKEN=
 ARG ASSETS_S3_BUCKET=
