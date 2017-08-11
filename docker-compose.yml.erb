@@ -38,7 +38,7 @@ services:
     #  - '443:443'
 
   mysql:
-    image: quay.io/continuouspipe/mysql5.7:stable
+    image: quay.io/continuouspipe/mysql5.6:stable
     environment:
       MYSQL_ROOT_PASSWORD: <%= config.tmp.mysql_root_password %>
       MYSQL_DATABASE: magentodb
