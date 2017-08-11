@@ -34,3 +34,7 @@ public/errors/local.xml
 public/media
 public/privatesales
 public/var
+
+# Docker
+/docker-compose.override.yml
+/docker.env

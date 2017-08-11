@@ -1,29 +1,41 @@
 version: '3'
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
+        DEVELOPMENT_MODE: 'true'
+        RUN_BUILD: 'false'
     depends_on:
       - mysql
       - redis
       - memcached
+      - sshforward
+      - mailcatcher
+      - tideways
+    env_file:
+      - ./docker.env
     environment:
       ASSETS_S3_BUCKET: '<%= config.asset_bucket %>'
       ASSETS_ENV: development
       ASSETS_CLEANUP: 'false'
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
       DATABASE_NAME: magentodb
       DATABASE_USER: magento
       DATABASE_PASSWORD: magento
       DATABASE_HOST: mysql
+      SENDMAIL_RELAY_HOST: 'mailcatcher'
+      SENDMAIL_RELAY_PORT: 1025
+      XDEBUG_REMOTE_ENABLED: 'false'
+      TIDEWAYS_ENABLED: 'true'
+      RUN_BUILD: # get from host env
     expose:
       - 80
       - 443
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - .:/app
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '80:80'
+    #  - '443:443'
 
   mysql:
     image: quay.io/continuouspipe/mysql5.7:stable
@@ -38,3 +50,29 @@ services:
 
   memcached:
     image: quay.io/continuouspipe/memcached1.4:stable
+
+  mailcatcher:
+    image: quay.io/continuouspipe/mailcatcher:stable
+    extra_hosts:
+      - 'mailcatcher:127.0.0.1'
+    expose:
+      - 1025
+      - 1080
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '1080:1080'
+
+  tideways:
+    image: quay.io/continuouspipe/tideways:stable
+    expose:
+      - 9135
+
+  sshforward:
+    image: quay.io/continuouspipe/ssh-forward:stable
+    environment:
+      SSH_FORWARD_PASSWORD: xd3bug
+    expose:
+      - 9000
+    # Please define ports in your docker-compose.override.yml
+    # ports:
+    #  - '2222:22'

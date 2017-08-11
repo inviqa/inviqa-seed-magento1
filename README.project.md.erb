@@ -1,6 +1,6 @@
 # <%= config.name %> Setup
 
-Please follow the below steps to get started, if you encounter any issues installing the dependencies or provisioning the vm please check the [Common Issues](#common-issues) section first.
+Please follow the below steps to get started, if you encounter any issues installing the dependencies or provisioning the development environment, please check the [Common Issues](#common-issues) section first.
 
 ## Clone the project
 
@@ -10,7 +10,94 @@ Clone the project into your local file system:
 git clone <%= config.git_url %>
 ```
 
-## Install Dependencies
+## Development Environment
+
+### Local development environment
+
+#### Docker setup
+If you are on OSX, install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/).
+
+If you are on Linux, use your package manager to install `docker`.
+
+If you are on Windows, install [Docker for Windows](https://docs.docker.com/docker-for-windows/install/).
+
+You should also install dockrsync from [dockrsync](https://github.com/webtatic/dockrsync).
+
+#### Project setup
+1. Run `dockrsync setup` and fill in the questions:
+   - The default service should be set as "web".
+   - The anybar question can be skipped over by hitting enter.
+   - We recommend choosing "yes" for the delete flag question.
+2. Copy `docker.env.dist` to `docker.env`
+3. Copy `docker-compose.override.yml.dist` to `docker-compose.override.yml`
+4. Fill in docker.env's secrets - do not commit this file!
+   - TIDEWAYS_API_KEY can be found in LastPass
+   - AWS_ACCESS_KEY_ID is found in your Hem configuration. Check `~/.hem/config.yaml` and `~/.hobo/config.yaml`.
+   - AWS_SECRET_ACCESS_KEY should be found wherever AWS_ACCESS_KEY_ID was.
+5. Run the following:
+   - for bash/zsh: `eval "$(echo $(printf "%s " $(cat docker.env)) docker-compose build)"`
+   - for fish: `eval env (echo (printf "'%s' " (cat docker.env)) docker-compose build)`
+6. Run `docker-compose up -d`
+7. Wait for the build to finish, you can follow along with `docker-compose logs -f web`
+8. Run `docker-compose exec web bash` to log in to your local "web" container.
+9. Run this to let you see the site from a nice domain:
+    - On Linux/OSX: `echo "127.0.0.1 <%= config.hostname %>" | sudo tee -a /etc/hosts`
+    - On Windows, open up `C:\Windows\system32\etc\HOSTS` in your favourite text editor as admin and add `127.0.0.1 <%= config.hostname %>`
+10. Run `dockrsync watch` to watch for changes to your local filesystem and upload them to the web container.
+11. The site will be available at [https://<%= config.hostname %>](https://<%= config.hostname %>). Happy coding!
+
+
+#### Dockrsync useful commands
+
+Note: Ensure you have committed every file you wish to keep, as the next command might overwrite it.
+Run `dockrsync fetch` to synchronise your local filesystem with the one in the container.
+
+
+#### Speed up startup time and customise parameters for your environment
+1. Change the variables that you want to in the `docker-compose.override.yml`
+   - `RUN_BUILD` being `false` will stop the build from running each time you bring up the web container.
+   - `XDEBUG_REMOTE_ENABLED` can be turned on to allow Xdebug to connect and debug the site. We recommend to turn off Tideways when Xdebug is on.
+   - `TIDEWAYS_ENABLED` can be turned off to allow Xdebug to not pick up `tideways.php` as the entry point for the application.
+2. Stop and start your environment: `docker-compose stop; docker-compose up -d`
+
+#### XDebug Setup
+1. Set `XDEBUG_REMOTE_ENABLED` to `true` and `TIDEWAYS_ENABLED` to `false` in `docker-compose.override.yml`, after copying it from `docker-compose.override.yml.dist` if you haven't already
+2. Run `docker-compose stop web; docker-compose up -d web`
+3. Run `ssh -p 2222 forward@localhost -N -R 9000:localhost:9000` in another tab
+4. In PHPStorm, configure a web server with path mapping /app/ to the project directory.
+5. In PHPStorm, click the listen for connections button in the top right
+6. In your browser, use an extension to set the right cookies to trigger Xdebug.
+
+### ContinuousPipe remote environment
+
+1. Request access from the team in #<%= config.name %> to see [the ContinuousPipe Project](https://ui.continuouspipe.io/project/<%= config.name %>/flows)
+2. Set up [CP Remote](https://docs.continuouspipe.io/remote-development/getting-started/)
+3. Go to the "<%= config.name %>" project on ContinuousPipe
+4. Set up a development environment using the "Developer Environments" tab
+5. Copy the command it gives you to your terminal (note, do not share the token it gives you with anyone!)
+6. Wait for the build to finish
+7. Answer which pod you would like to connect to by default. This will probably be "web".
+8. Run `cp-remote watch` to sync your local filesystem changes with the remote environment.
+9. In another tab, run `cp-remote bash` to log in to your remote "web" container.
+10. Develop away, ask in #<%= config.name %> or #continuous-pipe on Slack if you run into problems!
+
+The credentials for the HTTP auth that will be needed if you are on a non-whitelisted IP Address can be found in the
+Lastpass entry `<%= config.name %> on CP: HTTP Basic Auth` in the folder `Shared-<%= config.name %>-Accounts`
+
+#### XDebug Setup
+This will only work on development environments, as `sshforward` is only deployed there.
+
+1. In a `cp-remote bash` session, run the following to enable xdebug, disable tideways and increase the timeout for PHP requests to 10000 seconds:
+```
+XDEBUG_REMOTE_ENABLED="true" TIDEWAYS_ENABLED="false" PHP_MAX_EXECUTION_TIME="10000" container confd && pkill php-fpm && pkill nginx
+```
+2. On your machine in another terminal window, run `cp-remote forward -s sshforward 2222:22`
+3. On your machine in another terminal window, run `ssh -p 2222 forward@localhost -N -R 9000:localhost:9000`
+4. Configure PHPStorm or your desired IDE to listen for requests on port 9000.
+
+### Hem VM
+
+#### Install Dependencies
 
 1. Install the latest version of Hem from https://github.com/inviqa/hem
 
@@ -18,7 +105,7 @@ git clone <%= config.git_url %>
 
 3. Ensure you have AWS keys correctly configured either using `hem config` or by setting the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
 
-## Provision Environment
+#### Provision Environment
 
 You can now build the development environment for the first time. In the project directory, execute the following command:
 
@@ -26,7 +113,7 @@ You can now build the development environment for the first time. In the project
 
 You should now be able to access the site at [http://<%= config.hostname %>](http://<%= config.hostname %>)
 
-## Hem Usage
+#### Hem Usage
 
 With the Hem enabled environment up and running please make use of the following commands for day to day usage.
 
@@ -46,7 +133,7 @@ As setup issues are encountered please detail with step by step fix instructions
 
 # License
 
-Copyright 2014-2016, Inviqa
+Copyright 2014-2017, Inviqa
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

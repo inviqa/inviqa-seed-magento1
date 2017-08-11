@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build:
+      args:
+        DEVELOPMENT_MODE: 'true'
+        RUN_BUILD: 'false'
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      XDEBUG_REMOTE_ENABLED: 'false'
+      TIDEWAYS_ENABLED: 'true'
+      DEVELOPMENT_MODE: 'true'
+      RUN_BUILD: # get from host env
+
+  mysql:
+    ports:
+      - '3306:3306'
+
+  mailcatcher:
+    ports:
+      - '1080:1080'
+
+  sshforward:
+    ports:
+      - '2222:22'
