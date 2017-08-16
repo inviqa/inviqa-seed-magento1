@@ -1,4 +1,5 @@
 variables:
+  DATABASE_HOST: mysql
   DATABASE_NAME: magentodb
   DATABASE_USER: magento
   CP_ENVIRONMENT:
@@ -54,9 +55,9 @@ tasks:
         - name: RUN_BUILD
           value: 'true'
 
-    services:
-      web:
-        image: quay.io/organisation/<%= config.name %>
+      services:
+        web:
+          image: quay.io/organisation/<%= config.name %>
 
   infrastructure:
     deploy:
@@ -221,6 +222,7 @@ tasks:
               ASSETS_S3_BUCKET: ${ASSETS_S3_BUCKET}
               ASSETS_ENV: ''
               APP_USER_LOCAL: false
+              DATABASE_HOST: ${DATABASE_HOST}
               DATABASE_NAME: ${DATABASE_NAME}
               DATABASE_USER: ${DATABASE_USER}
               DATABASE_PASSWORD: ${DATABASE_PASSWORD}
