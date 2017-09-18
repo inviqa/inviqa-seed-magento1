@@ -1,9 +1,9 @@
 DEPENDENCIES
   apache2 (~> 3.2)
   chef-varnish
-    git: git://github.com/inviqa/chef-varnish.git
-    revision: b648abfb373d3cdac67f89d89f14944a265657a0
-    ref: 1.0.5
+    git: https://github.com/inviqa/chef-varnish.git
+    revision: b75b32ef89ad339f1476ba2121017a0ef606feaa
+    ref: 2.1.0
   config-driven-helper (~> 2.5)
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
@@ -51,8 +51,9 @@ GRAPH
     rsyslog (>= 2.0)
   build-essential (1.4.4)
   chef-sugar (3.4.0)
-  chef-varnish (1.0.5)
+  chef-varnish (2.1.0)
     apt (>= 0.0.0)
+    packagecloud (~> 0.3.0)
     yum (>= 0.0.0)
   compat_resource (12.10.7)
   config-driven-helper (2.5.0)
@@ -125,7 +126,7 @@ GRAPH
     windows (>= 1.38.0)
   ohai (1.1.12)
   openssl (1.1.0)
-  packagecloud (0.2.4)
+  packagecloud (0.3.0)
   php (1.5.0)
     build-essential (>= 0.0.0)
     iis (>= 0.0.0)
