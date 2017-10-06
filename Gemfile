@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+group :docker do
+  gem 'rake-tasks-docker', :git => 'https://github.com/inviqa/inviqa-rake-tasks-docker.git'
+end
+
 group :chef do
   gem "berkshelf", "~> 4.3"
   gem "chef", "~> 12.10.24"

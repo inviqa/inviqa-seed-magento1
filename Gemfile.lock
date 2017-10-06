@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/inviqa/inviqa-rake-tasks-docker.git
+  revision: d2064b609236ba8262d52a529b029faca31ba7b0
+  specs:
+    rake-tasks-docker (0.1.0)
+      rake (>= 10.0, <= 12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -291,6 +298,7 @@ DEPENDENCIES
   knife-solo_data_bag (~> 1.1.0)
   magentify (~> 0.0.7)
   railsless-deploy (~> 1.1)
+  rake-tasks-docker!
   rubocop (~> 0.40.0)
   rubygems-bundler (~> 1.4.4)
   serverspec (~> 2.31)

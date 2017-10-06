@@ -73,6 +73,9 @@ Hem.ui.success "Please also run `hem magento patches apply` to get the latest Ma
 Hem.ui.success "You may have to have run `hem vm up` beforehand if you aren't on Linux/OSX"
 Hem.ui.separator
 
+# Overwrite .dev hostnames with .test
+config.hostname = "#{config.name}.test"
+
 # Overwrite hem README with project README
 old_readme = 'README.md'
 new_readme = 'README.project.md.erb'
