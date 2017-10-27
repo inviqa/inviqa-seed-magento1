@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/inviqa/inviqa-rake-tasks-docker.git
-  revision: d2064b609236ba8262d52a529b029faca31ba7b0
+  revision: e7cdbfe9525c852b1b0d22924e09810f10a1c617
   specs:
     rake-tasks-docker (0.1.0)
       rake (>= 10.0, <= 12)
