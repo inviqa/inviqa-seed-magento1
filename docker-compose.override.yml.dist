@@ -13,6 +13,8 @@ services:
       TIDEWAYS_ENABLED: 'true'
       DEVELOPMENT_MODE: 'true'
       RUN_BUILD: # get from host env
+    volumes:
+      - tools/assets:/app/tools/assets
 
   mysql:
     ports:
