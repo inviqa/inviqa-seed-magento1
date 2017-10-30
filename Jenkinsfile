@@ -72,7 +72,7 @@ pipeline {
                     post {
                         always {
                             dir(env.PLANTED_PATH) {
-                                sh 'docker-compose down -v'
+                                sh 'docker-compose down -v --rmi local'
                             }
                         }
                     }
@@ -95,7 +95,7 @@ pipeline {
                     post {
                         always {
                             dir(env.PLANTED_PATH_LATEST) {
-                                sh 'docker-compose down -v'
+                                sh 'docker-compose down -v --rmi local'
                                 deleteDir()
                             }
                         }
