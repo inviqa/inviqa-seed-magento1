@@ -1,4 +1,4 @@
-version: '3'
+version: '2.3'
 services:
   web:
     build:
@@ -14,7 +14,7 @@ services:
       DEVELOPMENT_MODE: 'true'
       RUN_BUILD: # get from host env
     volumes:
-      - tools/assets:/app/tools/assets
+      - ./tools/assets:/app/tools/assets
 
   mysql:
     ports:

@@ -34,6 +34,16 @@ pipeline {
 
                 dir(env.PLANTED_PATH) {
                     sh 'hem deps gems'
+                    sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' docker-compose.yml'
+                    sh 'touch docker.env'
+                    sh '''python -c "$(cat <<EOF
+import sys, yaml
+data = yaml.load(sys.stdin)
+for service in data['services']:
+  data['services'][service].pop('ports', None)
+print yaml.dump(data, default_flow_style = False)
+EOF
+)" < docker-compose.override.yml.dist > docker-compose.override.yml'''
                 }
             }
             post {
@@ -64,8 +74,6 @@ pipeline {
                 stage('Docker Compose (stable tags)') {
                     steps {
                         dir(env.PLANTED_PATH) {
-                            sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' docker-compose.yml'
-                            sh 'touch docker.env'
                             sh 'hem exec bash -c \'rake docker:up\''
                         }
                     }
@@ -86,9 +94,7 @@ pipeline {
                         sh 'rm -rf "$PLANTED_PATH_LATEST" && cp -r "$PLANTED_PATH" "$PLANTED_PATH_LATEST"'
 
                         dir(env.PLANTED_PATH_LATEST) {
-                            sh 'sed -i -e \'/^\\s*ASSETS_S3_BUCKET/d\' -e \'s/^\\(\\s*image:\\s*quay.io\\/continuouspipe\\/.*:\\)stable\\s*$/\\1latest/\' docker-compose.yml'
-                            sh 'sed -i -e \'s/^\\(\\s*image:\\s*quay.io\\/continuouspipe\\/.*:\\)stable\\s*$/\\1latest/\' Dockerfile'
-                            sh 'touch docker.env'
+                            sh 'sed -i -e \'s/^\\(quay.io\\/continuouspipe\\/.*:\\)stable\\s*$/\\1latest/\' docker-compose.yml Dockerfile'
                             sh 'hem exec bash -c \'rake docker:up\''
                         }
                     }

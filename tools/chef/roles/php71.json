@@ -1,0 +1,35 @@
+{
+  "name": "php71",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP7.1 role",
+  "override_attributes": {
+    "php-fpm": {
+      "package_name": "php71w-fpm"
+    },
+    "php": {
+      "packages": [
+        "php71w",
+        "php71w-bcmath",
+        "php71w-devel",
+        "php71w-fpm",
+        "php71w-gd",
+        "php71w-mbstring",
+        "php71w-mcrypt",
+        "php71w-mysqlnd",
+        "php71w-opcache",
+        "php71w-pdo",
+        "php71w-pecl-apcu",
+        "php71w-pecl-imagick",
+        "php71w-pecl-redis",
+        "php71w-soap",
+        "php71w-xml",
+        "php71w-xmlrpc"
+      ]
+    }
+  },
+  "run_list": [
+    "yum-webtatic",
+    "php"
+  ]
+}
