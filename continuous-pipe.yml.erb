@@ -5,7 +5,10 @@ variables:
   CP_ENVIRONMENT:
     name: CP_ENVIRONMENT
     expression: '"<%= config.name %>-" ~ code_reference.branch'
-  CP_ENVIRONMENT_DOMAIN_SUFFIX: -<%= config.name %>.webpipeline.net
+  CP_ENVIRONMENT_DOMAIN:
+    name: CP_ENVIRONMENT_DOMAIN
+    # construct a domain from the branch no longer than 64 characters
+    expression: 'slugify(hash_long_domain_prefix(code_reference.branch, 64 - <%= "-#{config.name}.webpipeline.net".length %>)) ~ "-<%= config.name %>.webpipeline.net"'
   SENDMAIL_RELAY_HOST:
     name: SENDMAIL_RELAY_HOST
     expression: '"mailcatcher.<%= config.name %>-" ~ slugify(code_reference.branch) ~ ".svc.cluster.local"'
@@ -194,10 +197,12 @@ tasks:
                     email: ${CLOUD_FLARE_EMAIL?:}
                     api_key: ${CLOUD_FLARE_API_KEY?:}
                 proxied: true
-                record_suffix: ${CP_ENVIRONMENT_DOMAIN_SUFFIX}
+                host:
+                  expression: '"${CP_ENVIRONMENT_DOMAIN}"'
               ingress:
                 class: nginx
-                host_suffix: ${CP_ENVIRONMENT_DOMAIN_SUFFIX}
+                host:
+                  expression: '"${CP_ENVIRONMENT_DOMAIN}"'
           specification:
             source:
               image: continuouspipe/landing-page
@@ -238,6 +243,7 @@ tasks:
               TRUSTED_REVERSE_PROXIES: ${TRUSTED_REVERSE_PROXIES?:}
               TIDEWAYS_API_KEY: ${TIDEWAYS_API_KEY?:}
               SENDMAIL_RELAY_HOST: ${SENDMAIL_RELAY_HOST}
+              WEB_HOST: ${CP_ENVIRONMENT_DOMAIN}
 
             resources:
               requests:

@@ -10,19 +10,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 # Hobo.vagrant_plugin "vagrant-hostsupdater"
 # Hobo.vagrant_plugin "vagrant-cachier"
+# Hobo.vagrant_plugin "vagrant-chef-solo-mount-options"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # vagrant-hostsupdater settings
   config.vm.hostname = "<%= config.hostname %>"
   # config.hostsupdater.aliases = []
-  
-
-  # Mount settings
-  nfs_version = 3
-  nfs_version = 4 if FFI::Platform::IS_LINUX
-  mount_options = { mount_options: ["dmode=777", "fmode=777"] }
-  mount_options = { nfs: true, nfs_version: nfs_version, nfs_udp: false } unless FFI::Platform::IS_WINDOWS
 
   # Box configuration
   config.vm.box = 'inviqa/centos-7-stack-php56'
@@ -34,10 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   [:composer, :npm, :bower, :yum, :chef].each do |cache|
     config.cache.enable cache
   end
-  config.cache.synced_folder_opts = {
-    type: :nfs,
-    mount_options: ['rw', "vers=#{nfs_version}", 'tcp', 'nolock']
-  } unless FFI::Platform::IS_WINDOWS
+  config.cache.synced_folder_opts = mount_options
 
   # Virtualbox specific configuration
   config.vm.provider :virtualbox do |vb, overrides|
@@ -56,11 +47,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     )
   end
 
-  config.vm.provision :chef_solo do |chef|
+  config.vm.provision :chef_solo_mount_options do |chef|
     # Do not add site-cookbooks to this
     # Berkshelf will copy any site-cookbooks defined in the Berksfile
     chef.version = '12.10'
     chef.channel = 'stable'
+
+    # Use NFS for speed and avoiding vboxfs issues
+    chef.synced_folder_type = :nfs unless FFI::Platform::IS_WINDOWS
+    chef.synced_folder_options = mount_options
 
     chef.cookbooks_path = "../chef/cookbooks"
     chef.environments_path = "../chef/environments"
@@ -92,4 +87,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
     end
   end
+end
+
+def mount_options
+  nfs_version = 3
+  nfs_version = 4 if FFI::Platform::IS_LINUX
+  protocol = 'udp'
+  protocol = 'tcp' if nfs_version == 4
+  mount_options = { mount_options: ["dmode=777", "fmode=777"] }
+  mount_options = {
+    type: :nfs,
+    nfs: true,
+    mount_options: ['rw', "vers=#{nfs_version}", protocol, 'nolock', 'noatime', 'actimeo=1']
+  } unless FFI::Platform::IS_WINDOWS
+  mount_options
 end
