@@ -7,7 +7,13 @@ require 'magento/magerun'
 
 set :repository, "<%= config.git_url %>"
 set :scm, :git
-set :user, "deploy"
+
+# uses a single fixed user for SSH and deploy
+# set :user, "deploy"
+
+# uses managed individual users for SSH and sudo to fixed user for command execution
+set :default_shell, 'TERM=dumb sudo -u deploy sh'
+
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :keep_releases, 5

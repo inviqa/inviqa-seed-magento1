@@ -83,7 +83,7 @@ EOF
                     post {
                         always {
                             dir(env.PLANTED_PATH) {
-                                sh 'docker-compose down -v --rmi local'
+                                sh 'hem exec bash -c \'rake docker:down\''
                             }
                         }
                     }
@@ -104,7 +104,7 @@ EOF
                     post {
                         always {
                             dir(env.PLANTED_PATH_LATEST) {
-                                sh 'docker-compose down -v --rmi local'
+                                sh 'hem exec bash -c \'rake docker:down\''
                                 deleteDir()
                             }
                         }

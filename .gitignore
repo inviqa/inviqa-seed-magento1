@@ -36,5 +36,6 @@ public/privatesales
 public/var
 
 # Docker
+/.docker-sync
 /docker-compose.override.yml
 /docker.env

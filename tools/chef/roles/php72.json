@@ -1,0 +1,34 @@
+{
+  "name": "php72",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP7.2 role",
+  "override_attributes": {
+    "php-fpm": {
+      "package_name": "php72w-fpm"
+    },
+    "php": {
+      "packages": [
+        "php72w",
+        "php72w-bcmath",
+        "php72w-devel",
+        "php72w-fpm",
+        "php72w-gd",
+        "php72w-mbstring",
+        "php72w-mysqlnd",
+        "php72w-opcache",
+        "php72w-pdo",
+        "php72w-pecl-apcu",
+        "php72w-pecl-imagick",
+        "php72w-pecl-redis",
+        "php72w-soap",
+        "php72w-xml",
+        "php72w-xmlrpc"
+      ]
+    }
+  },
+  "run_list": [
+    "yum-webtatic",
+    "php"
+  ]
+}

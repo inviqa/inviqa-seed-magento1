@@ -1,0 +1,5 @@
+set :deploy_to, "/var/www/<%= config.name %>-int"
+set :branch, "develop"
+set :keep_releases, 5
+
+server "int_domain", :app, :primary => true

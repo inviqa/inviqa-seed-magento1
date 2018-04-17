@@ -12,50 +12,85 @@ git clone <%= config.git_url %>
 
 ## Development Environment
 
-### Local development environment
+### Getting Started
 
-#### Docker setup
-If you are on OSX, install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/).
+#### Prerequisites
 
-If you are on Linux, use your package manager to install `docker`.
+##### General
 
-If you are on Windows, install [Docker for Windows](https://docs.docker.com/docker-for-windows/install/).
+- A GitHub Token
+  - This can be generated at [GitHub](https://github.com/settings/tokens).
+- Access to LastPass
+- Access to AWS
+  - If you do not have access you can request it from support.
+- Tideways API Key
+  - If you wish to run tideways profiling on your development environment, you will find this in LastPass.
 
-You should also install dockrsync from [dockrsync](https://github.com/webtatic/dockrsync).
+##### Docker
 
-#### Project setup
-1. Run `dockrsync setup` and fill in the questions:
-   - The default service should be set as "web".
-   - The anybar question can be skipped over by hitting enter.
-   - We recommend choosing "yes" for the delete flag question.
-2. Copy `docker.env.dist` to `docker.env`
-3. Copy `docker-compose.override.yml.dist` to `docker-compose.override.yml`
-4. Fill in docker.env's secrets - do not commit this file!
+- A working docker setup
+  - On MacOS, use [Docker for Mac](https://docs.docker.com/docker-for-mac/install/).
+  - On Linux, add the official Docker repository and install the "docker-ce" package.
+- Ruby 2.2 if you want to use the rake tasks.
+- On MacOS, if you wish to use [docker-sync](https://github.com/EugenMayer/docker-sync) for near-native file access speed run:
+  ```bash
+  gem install docker-sync
+  ```
+  You should also add:
+  ```
+  export RAKE_USE_DOCKER_SYNC=true
+  ```
+  to your `~/.bash_profile`
+
+#### Setup
+
+1. Copy `docker.env.dist` to `docker.env`
+2. Fill in docker.env's secrets - do not commit this file!
    - TIDEWAYS_API_KEY can be found in LastPass
    - AWS_ACCESS_KEY_ID is found in your Hem configuration. Check `~/.hem/config.yaml` and `~/.hobo/config.yaml`.
    - AWS_SECRET_ACCESS_KEY should be found wherever AWS_ACCESS_KEY_ID was.
-5. Run the following:
+3. Run the following:
    - for bash/zsh: `eval "$(echo $(printf "%s " $(cat docker.env)) docker-compose build)"`
    - for fish: `eval env (echo (printf "'%s' " (cat docker.env)) docker-compose build)`
-6. Run `docker-compose up -d`
-7. Wait for the build to finish, you can follow along with `docker-compose logs -f web`
-8. Run `docker-compose exec web bash` to log in to your local "web" container.
-9. Run this to let you see the site from a nice domain:
+4. Run this to let you see the site from a nice domain:
     - On Linux/OSX: `echo "127.0.0.1 <%= config.hostname %>" | sudo tee -a /etc/hosts`
     - On Windows, open up `C:\Windows\system32\etc\HOSTS` in your favourite text editor as admin and add `127.0.0.1 <%= config.hostname %>`
-10. Run `dockrsync watch` to watch for changes to your local filesystem and upload them to the web container.
-11. The site will be available at [https://<%= config.hostname %>](https://<%= config.hostname %>). Happy coding!
+5. Setup docker-compose.override config and start docker-compose up:
 
+```bash
+bundle install
 
-#### Dockrsync useful commands
+rake docker:setup
+docker-compose up -d
+```
 
-Note: Ensure you have committed every file you wish to keep, as the next command might overwrite it.
-Run `dockrsync fetch` to synchronise your local filesystem with the one in the container.
+or you can use the rake-tasks-docker helper to perform a setup and up in one go via:
 
+```bash
+bundle install
 
-#### Speed up startup time and customise parameters for your environment
+rake docker:up
+```
+The `rake docker:up` task will automatically start up `docker-sync` if you are using that.
+
+Once the environment is running, you should be able to browse to the site at
+[https://<%= config.hostname %>](https://<%= config.hostname %>)
+
+### Usage
+
+```
+Usage:
+  rake <target>[<arguments>]
+
+Targets:
+  docker:setup               initial project setup and configuration.
+  docker:up                  start up the docker-compose environment
+```
+
+### Customising
+
 1. Change the variables that you want to in the `docker-compose.override.yml`
-   - `RUN_BUILD` being `false` will stop the build from running each time you bring up the web container.
+   - `RUN_BUILD` being `false` will stop the build from running each time you bring up your environment.
    - `XDEBUG_REMOTE_ENABLED` can be turned on to allow Xdebug to connect and debug the site. We recommend to turn off Tideways when Xdebug is on.
    - `TIDEWAYS_ENABLED` can be turned off to allow Xdebug to not pick up `tideways.php` as the entry point for the application.
 2. Stop and start your environment: `docker-compose stop; docker-compose up -d`
@@ -68,7 +103,7 @@ Run `dockrsync fetch` to synchronise your local filesystem with the one in the c
 5. In PHPStorm, click the listen for connections button in the top right
 6. In your browser, use an extension to set the right cookies to trigger Xdebug.
 
-### ContinuousPipe remote environment
+## ContinuousPipe remote environment
 
 1. Request access from the team in #<%= config.name %> to see [the ContinuousPipe Project](https://ui.continuouspipe.io/project/<%= config.name %>/flows)
 2. Set up [CP Remote](https://docs.continuouspipe.io/remote-development/getting-started/)
@@ -95,11 +130,11 @@ XDEBUG_REMOTE_ENABLED="true" TIDEWAYS_ENABLED="false" PHP_MAX_EXECUTION_TIME="10
 3. On your machine in another terminal window, run `ssh -p 2222 forward@localhost -N -R 9000:localhost:9000`
 4. Configure PHPStorm or your desired IDE to listen for requests on port 9000.
 
-### Hem VM
+## Hem VM
 
 #### Install Dependencies
 
-1. Install the latest version of Hem from https://github.com/inviqa/hem
+1. Install the latest version of Hem from [inviqa/hem on GitHub](https://github.com/inviqa/hem)
 
 2. Install the latest version of Vagrant from [http://www.vagrantup.com/downloads.html](http://www.vagrantup.com/downloads.html)
 
@@ -124,7 +159,7 @@ hem vm ssh    # Start an SSH session on the VM
 hem vm mysql  # Connect to the database on the VM
 ```
 
-## Common Issues
+#### Common Issues
 
 As setup issues are encountered please detail with step by step fix instructions, and where possible update the project itself to provide a more permanent fix.
 

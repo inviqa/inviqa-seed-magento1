@@ -1,0 +1,40 @@
+version: '2'
+options:
+  max_attempt: 20
+
+syncs:
+  <%= config.name %>-sync:
+    src: "./"
+    sync_userid: '999'
+    sync_excludes_type: 'BelowPath'
+    sync_excludes: &SYNC_EXCLUDES
+      - .cp-remote-settings.yml
+      - .docker-sync
+      - .dockerignore
+      - .DS_Store
+      - .editorconfig
+      - .git
+      - .gitignore
+      - .idea
+      - .scrutinizer.yml
+      - .travis.yml
+      - build.xml
+      - continuous-pipe.yml
+      - cp-remote-logs
+      - docker-compose-dev-linux.yml
+      - docker-compose-dev-macos-delegated.yml
+      - docker-compose-dev-macos-sync.yml
+      - docker-compose.override.yml
+      - docker-compose.override.yml.dist
+      - docker-compose.yml
+      - docker-sync.yml
+      - docker.env
+      - docker.env.dist
+      - Dockerfile
+      - README.md
+      - tools/capistrano
+      - tools/ci
+      - tools/chef
+      - tools/hem
+      - tools/vagrant
+    watch_excludes: *SYNC_EXCLUDES

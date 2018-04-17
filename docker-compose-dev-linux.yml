@@ -1,0 +1,9 @@
+version: '2.3'
+services:
+  web:
+    volumes:
+      - .:/app
+    environment:
+      APP_USER_LOCAL: 'true'
+      APP_USER: 'build'
+      APP_GROUP: 'build'

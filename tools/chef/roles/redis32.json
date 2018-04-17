@@ -1,12 +1,12 @@
 {
-  "name": "redis30",
+  "name": "redis32",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "Redis 3.0 server role",
+  "description": "Redis 3.2 server role",
   "default_attributes": {
     "redisio": {
       "package_install": true,
-      "package_name": "redis30u",
+      "package_name": "redis32u",
       "safe_install": false,
       "default_settings": {
         "loglevel": "warning",
@@ -19,12 +19,6 @@
           "port": "6379"
         }
       ]
-    },
-    "yum": {
-      "ius-archive": {
-        "enabled": true,
-        "managed": true
-      }
     }
   },
   "run_list": [

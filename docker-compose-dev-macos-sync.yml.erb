@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+  web:
+    environment:
+      APP_USER: 'build'
+      APP_GROUP: 'build'
+    volumes:
+      - <%= config.name %>-sync:/app:nocopy
+
+volumes:
+  <%= config.name %>-sync:
+    external: true

@@ -4,7 +4,7 @@ DEPENDENCIES
     git: https://github.com/inviqa/chef-varnish.git
     revision: b75b32ef89ad339f1476ba2121017a0ef606feaa
     ref: 2.1.0
-  config-driven-helper (~> 2.5)
+  config-driven-helper (~> 3.0)
   data-bag-merge (~> 0.2.4)
   elasticsearch (~> 0.3.7)
   iptables-patterns (~> 0.1.0)
@@ -56,7 +56,7 @@ GRAPH
     packagecloud (~> 0.3.0)
     yum (>= 0.0.0)
   compat_resource (12.10.7)
-  config-driven-helper (2.5.0)
+  config-driven-helper (3.0.0)
     apache2 (>= 1.8)
     build-essential (~> 1.4)
     database (~> 2.0.0)

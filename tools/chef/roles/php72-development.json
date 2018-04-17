@@ -1,0 +1,16 @@
+{
+  "name": "php72-development",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "PHP7.2 development role",
+  "override_attributes": {
+    "php": {
+      "packages": [
+        "php72w-pecl-xdebug"
+      ]
+    }
+  },
+  "run_list": [
+    "role[php72]"
+  ]
+}
