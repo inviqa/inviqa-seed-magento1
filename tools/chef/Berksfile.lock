@@ -13,7 +13,7 @@ DEPENDENCIES
     git: git://github.com/inviqa/chef-jetty.git
     revision: de58c6923d4c6387deabb7ace92ee051a408328d
     tag: 0.2
-  magento-ng (~> 1.0)
+  magento-ng (~> 2.0)
   mailcatcher-ng (~> 0.1.0)
   memcached (~> 2.1.0)
   mysql (~> 4.1.2)
@@ -93,10 +93,9 @@ GRAPH
   jetty (0.2.0)
     iptables (>= 0.0.0)
     java (>= 0.0.0)
-  logrotate (2.1.0)
-    compat_resource (>= 0.0.0)
-  magento-ng (1.0.1)
-    config-driven-helper (< 3.0)
+  logrotate (2.2.0)
+  magento-ng (2.0.0)
+    config-driven-helper (~> 3.0)
     cron (>= 1.4)
     logrotate (>= 1.9)
     php-fpm (>= 0.0.0)
