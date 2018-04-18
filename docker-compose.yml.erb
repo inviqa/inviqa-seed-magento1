@@ -33,7 +33,7 @@ services:
       WEB_HOST: localhost
       AUTH_HTTP_HEALTHCHECK_LOCATION: '/status/healthcheck'
     healthcheck:
-      test: ["CMD", "curl", "--fail", "--header", "--insecure", "https://localhost/status/healthcheck"]
+      test: ["CMD", "curl", "--fail", "--insecure", "https://localhost/status/healthcheck"]
       interval: 10s
       retries: 18
     expose:
