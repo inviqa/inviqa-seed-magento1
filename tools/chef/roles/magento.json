@@ -1,0 +1,13 @@
+{
+  "name": "magento",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Magento role configuration",
+  "default_attributes": {
+    "mysql": {
+      "tunable": {
+        "binlog_format": "MIXED"
+      }
+    }
+  }
+}
