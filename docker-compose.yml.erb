@@ -30,7 +30,7 @@ services:
       TIDEWAYS_ENABLED: 'true'
       RUN_BUILD: # get from host env
       WEB_DIRECTORY: public
-      WEB_HOST: localhost
+      WEB_HOST: <%= config.hostname %>
       AUTH_HTTP_HEALTHCHECK_LOCATION: '/status/healthcheck'
     healthcheck:
       test: ["CMD", "curl", "--fail", "--insecure", "https://localhost/status/healthcheck"]
